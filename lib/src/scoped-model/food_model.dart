@@ -32,22 +32,28 @@ class FoodModel extends Model {
         "price": food.price,
         "discount": food.discount,
       };
-      final http.Response response = await http.post(
-          "https://foodie2-fe2c7.firebaseio.com/foods.json",
-          body: json.encode(foodData));
+      // final http.Response response = await http.post(
+      //     "https://foodie2-fe2c7.firebaseio.com/foods.json",
+      //     body: json.encode(foodData));
 
-      final Map<String, dynamic> responeData = json.decode(response.body);
+      // final Map<String, dynamic> responeData = json.decode(response.body);
 
-      Food foodWithID = Food(
-        id: responeData["name"],
-        name: food.name,
-        description: food.description,
-        category: food.category,
-        discount: food.discount,
-        price: food.price,
-      );
+      // Food foodWithID = Food(
+      //   id: responeData["name"],
+      //   name: food.name,
+      //   description: food.description,
+      //   category: food.category,
+      //   discount: food.discount,
+      //   price: food.price,
+      // );
 
-      _foods.add(foodWithID);
+      print("Food title : " + food.name);
+      print("Food category : " + food.category);
+      print("Food description : " + food.description);
+      print("Food price : " + food.price.toString());
+      print("Food Dicount : " + food.discount.toString());
+
+      // _foods.add(foodWithID);
       _isLoading = false;
       notifyListeners();
       // fetchFoods();
@@ -55,6 +61,12 @@ class FoodModel extends Model {
     } catch (e) {
       _isLoading = false;
       notifyListeners();
+      print("Food title : " + food.name);
+      print("Food category : " + food.category);
+      print("Food description : " + food.description);
+      print("Food price : " + food.price.toString());
+      print("Food Dicount : " + food.discount.toString());
+
       return Future.value(false);
       // print("Connection error: $e");
     }

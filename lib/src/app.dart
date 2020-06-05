@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodfreelancing/src/pages/authenticate.dart';
-import 'package:foodfreelancing/src/pages/signup_page.dart';
+import 'package:foodfreelancing/src/pages/option.dart';
+import 'package:foodfreelancing/src/pages/signup.dart';
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'screens/main_screen.dart';
@@ -15,12 +16,19 @@ class App extends StatelessWidget {
     print("APP CALLED");
     final user = Provider.of<User>(context);
     print("app user :");
-    print(user);
+    // print(user.uid);
+
     if (user == null) {
       print("user==null:  Called");
       return Authenticate();
     } else {
+      // return OptionPage();
       print("Home Called");
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => OptionPage()));
+      // return OptionPage();
+      // return Authenticate();
+
       return ScopedModel<MainModel>(
         model: mainModel,
         child: MaterialApp(

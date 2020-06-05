@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:foodfreelancing/src/models/food_model.dart';
+import 'package:foodfreelancing/src/models/user.dart';
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
 import 'package:foodfreelancing/src/widgets/button.dart';
 import 'package:foodfreelancing/src/widgets/show_dailog.dart';
+import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AddFoodItem extends StatefulWidget {
@@ -26,6 +28,8 @@ class _AddFoodItemState extends State<AddFoodItem> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+    print("Add Food Item Uid: " + user.uid);
     return SafeArea(
       child: WillPopScope(
         onWillPop: () {
@@ -88,22 +92,35 @@ class _AddFoodItemState extends State<AddFoodItem> {
                       builder: (BuildContext context, Widget child,
                           MainModel model) {
                         return GestureDetector(
-                          onTap: () {
-                            onSubmit(model.addFood, model.updateFood);
-                            if (model.isLoading) {
-                              // show loading progess indicator
-                              showLoadingIndicator(
-                                  context,
-                                  widget.food != null
-                                      ? "Updating food..."
-                                      : "Adding food...");
-                            }
-                          },
-                          child: Button(
-                              btnText: widget.food != null
-                                  ? "Update Food Item"
-                                  : "Add Food Item"),
-                        );
+                            onTap: () {
+                              print("Food title : " + title);
+                              print("Food category : " + category);
+                              print("Food description : " + description);
+                              print("Food price : " + price.toString());
+                              print("Food Dicount : " + discount.toString());
+                              onSubmit(model.addFood, model.updateFood);
+                              if (model.isLoading) {
+                                // show loading progess indicator
+                                showLoadingIndicator(
+                                    context,
+                                    widget.food != null
+                                        ? "Updating food..."
+                                        : "Adding food...");
+                              }
+                            },
+                            child: FlatButton(
+                              onPressed: () async {
+                                print("Food title : " + title);
+                                print("Food category : " + category);
+                                print("Food description : " + description);
+                                print("Food price : " + price.toString());
+                                print("Food Dicount : " + discount.toString());
+                              },
+                              child: Button(
+                                  btnText: widget.food != null
+                                      ? "Update Food Item"
+                                      : "Add Food Item"),
+                            ));
                       },
                     ),
                   ],
@@ -129,6 +146,11 @@ class _AddFoodItemState extends State<AddFoodItem> {
           "price": double.parse(price),
           "discount": discount != null ? double.parse(discount) : 0.0,
         };
+        print("Food title : " + title);
+        print("Food category : " + category);
+        print("Food description : " + description);
+        print("Food price : " + price.toString());
+        print("Food Dicount : " + discount.toString());
 
         final bool response = await updateFood(updatedFoodItem, widget.food.id);
         if (response) {
@@ -155,6 +177,11 @@ class _AddFoodItemState extends State<AddFoodItem> {
           price: double.parse(price),
           discount: double.parse(discount),
         );
+        print("Food title : " + food.name);
+        print("Food category : " + food.category);
+        print("Food description : " + food.description);
+        print("Food price : " + food.price.toString());
+        print("Food Dicount : " + food.discount.toString());
         bool value = await addFood(food);
         if (value) {
           Navigator.of(context).pop();
@@ -209,10 +236,12 @@ class _AddFoodItemState extends State<AddFoodItem> {
       },
       onSaved: (String value) {
         if (hint == "Food Title") {
+          print("Food title : " + title);
           title = value;
         }
         if (hint == "Category") {
           category = value;
+          print("Food category : " + category);
         }
         if (hint == "Description") {
           description = value;
@@ -223,6 +252,11 @@ class _AddFoodItemState extends State<AddFoodItem> {
         if (hint == "Discount") {
           discount = value;
         }
+        print("Food title : " + title);
+        print("Food category : " + category);
+        print("Food description : " + description);
+        print("Food price : " + price.toString());
+        print("Food Dicount : " + discount.toString());
       },
     );
   }
