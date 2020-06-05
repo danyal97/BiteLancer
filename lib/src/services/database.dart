@@ -9,6 +9,7 @@ class DatabaseService {
       Firestore.instance.collection("UserName");
 
   Future updateUsername(String name) async {
+    print("Update Username Called");
     return await userName.document(uid).setData({
       'username': name,
     });

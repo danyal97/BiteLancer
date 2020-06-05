@@ -180,7 +180,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           print("Username : " + username);
                           print("Email : " + email);
                           print("Password : " + password);
-                          print("Password : " + confirmpassword);
+                          // print("Password : " + confirmpassword);
                           if (result is String) {
                             setState(() {
                               error = result.split(",")[1];
