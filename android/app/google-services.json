@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "14738935254",
+    "firebase_url": "https://foodfreelancing.firebaseio.com",
+    "project_id": "foodfreelancing",
+    "storage_bucket": "foodfreelancing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14738935254:android:1680a203fb525339902877",
+        "android_client_info": {
+          "package_name": "com.example.foodfreelancing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14738935254-3k6r7k1vop789qbcn7sinsm8de45segj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBto3MI9BNYrD-ALzrEft-Z8EGaR7iX1no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14738935254-3k6r7k1vop789qbcn7sinsm8de45segj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
