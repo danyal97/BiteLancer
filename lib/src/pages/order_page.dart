@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodfreelancing/src/models/user.dart';
+import 'package:foodfreelancing/src/pages/authenticate.dart';
 import 'package:foodfreelancing/src/pages/sigin_page.dart';
+import 'package:provider/provider.dart';
 import '../widgets/order_card.dart';
 
 class OrderPage extends StatefulWidget {
@@ -10,6 +13,8 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+    print(user);
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView(
@@ -20,11 +25,11 @@ class _OrderPageState extends State<OrderPage> {
           OrderCard(),
         ],
       ),
-      bottomNavigationBar: _buildTotalContainer(),
+      bottomNavigationBar: _buildTotalContainer(user),
     );
   }
 
-  Widget _buildTotalContainer() {
+  Widget _buildTotalContainer(user) {
     return Container(
       height: 220.0,
       padding: EdgeInsets.only(
@@ -133,9 +138,31 @@ class _OrderPageState extends State<OrderPage> {
           ),
           GestureDetector(
             onTap: () {
-              print("sigin page called");
-              // Navigator.of(context).push(MaterialPageRoute(
-              // builder: (BuildContext context) => SignInPage()));
+              if (user == null) {
+                print("user==null:  Called");
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Authenticate()));
+              } else {
+                // Navigator.of(context).pop();
+                // Navigator.of(context).popUntil((route) => false);
+                // Navigator.of(context).pop(MaterialPageRoute(
+                //     builder: (BuildContext context) => Authenticate()));
+                print("Succeeded ");
+
+                // return ScopedModel<MainModel>(
+                //   model: mainModel,
+                //   child: MaterialApp(
+                //     debugShowCheckedModeBanner: false,
+                //     title: "Food Delivery App",
+                //     theme: ThemeData(primaryColor: Colors.blueAccent),
+                //     home: MainScreen(model: mainModel),
+                // home: AddFoodItem(),
+                // ),
+                // );
+                // }
+                // print("sigin page called");
+
+              }
             },
             child: Container(
               height: 50.0,

@@ -14,10 +14,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     print("APP CALLED");
     final user = Provider.of<User>(context);
-    print("app called");
+    print("app user :");
     print(user);
     if (user == null) {
-      print("SignIn Page Called");
+      print("user==null:  Called");
       return Authenticate();
     } else {
       print("Home Called");

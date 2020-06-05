@@ -45,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("Main Model Called");
+    // print("Main Model Called");
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

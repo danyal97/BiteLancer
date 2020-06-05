@@ -72,6 +72,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("SignIn Called");
     return loading
         ? Loading()
         : Scaffold(

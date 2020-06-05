@@ -116,6 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("SignUp Called");
     return loading
         ? Loading()
         : Scaffold(
@@ -172,9 +173,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           setState(() {
                             loading = true;
                           });
-                          dynamic result = await _auth
-                              .registerWithEmailAndPassword(email, password);
-                          print("SignUp Called");
+                          dynamic result =
+                              await _auth.registerWithEmailAndPassword(
+                                  email, password, username);
+                          // print("SignUp Called");
                           print("Username : " + username);
                           print("Email : " + email);
                           print("Password : " + password);
