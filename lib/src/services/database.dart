@@ -5,15 +5,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
-  final CollectionReference userName =
-      Firestore.instance.collection("UserName");
+  final CollectionReference sellerCollection = Firestore.instance.collection("Seller");
+  final CollectionReference buyerCollection = Firestore.instance.collection("Buyer");
 
-  Future updateUsername(String name) async {
+  Future addSeller(String name) async {
     print("Update Username Called");
-    return await userName.document(uid).setData({
+    return await sellerCollection.document(uid).setData({
       'username': name,
+      'img':'avatar.png',
     });
   }
+  Future addBuyer(String name) async {
+      print("Update Username Called");
+      return await buyerCollection.document(uid).setData({
+        'username': name,
+        'img':'avatar.png',
+      });
+    }
 
   // List<FoodItems> _foodItemListFromSnapshot(QuerySnapshot snapshot) {
   //   return snapshot.documents

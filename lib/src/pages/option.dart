@@ -89,6 +89,7 @@ class _OptionPageState extends State<OptionPage> {
                             setState(() {
                               loading = true;
                             });
+                            final type = "Consumer";
                             dynamic result;
                             if (widget.label == "login") {
                               result = await _auth.signInWithEmailAndPassword(
@@ -97,9 +98,9 @@ class _OptionPageState extends State<OptionPage> {
                               result = await _auth.registerWithEmailAndPassword(
                                   widget.email,
                                   widget.password,
-                                  widget.username);
+                                  widget.username,
+                                  type);
                             }
-
                             if (result is String) {
                               setState(() {
                                 // error = result.split(",")[1];
@@ -136,7 +137,33 @@ class _OptionPageState extends State<OptionPage> {
                         child: MaterialButton(
                           minWidth: double.infinity,
                           height: 60,
-                          onPressed: () {},
+                          onPressed: () async {
+                            // loading = true;
+                            setState(() {
+                              loading = true;
+                            });
+                            final type = "Caterer";
+                            dynamic result;
+                            if (widget.label == "login") {
+                              result = await _auth.signInWithEmailAndPassword(
+                                  widget.email, widget.password);
+                            } else if (widget.label == "signup") {
+                              result = await _auth.registerWithEmailAndPassword(
+                                  widget.email,
+                                  widget.password,
+                                  widget.username,
+                                  type);
+                            }
+                            if (result is String) {
+                              setState(() {
+                                // error = result.split(",")[1];
+                                loading = false;
+                              });
+                              Navigator.pop(context);
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          },
                           color: Colors.greenAccent,
                           elevation: 0,
                           shape: RoundedRectangleBorder(

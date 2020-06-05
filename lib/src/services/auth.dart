@@ -34,15 +34,21 @@ class AuthService {
 
   // registeration
   Future registerWithEmailAndPassword(
-      String email, String password, String username) async {
+      String email, String password, String username,String type) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
       FirebaseUser user = result.user;
+      user.sendEmailVerification();
       // print(user);
-
-      await DatabaseService(uid: user.uid).updateUsername(username);
+      if(type == "Consumer"){
+      await DatabaseService(uid: user.uid).addBuyer(username);
+      }
+      else{
+        await DatabaseService(uid: user.uid).addSeller(username);
+      }
+      
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());
