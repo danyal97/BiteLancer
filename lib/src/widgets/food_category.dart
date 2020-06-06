@@ -33,13 +33,13 @@ class _FoodCategoryState extends State<FoodCategory> {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 
-    Firestore.instance
-        .collection("Task")
-        .getDocuments()
-        .then((value) => value.documents.forEach((element) {
-              print("Elelelelelelel");
-              print(element.documentID);
-            }));
+    // Firestore.instance
+    //     .collection("Task")
+    //     .getDocuments()
+    //     .then((value) => value.documents.forEach((element) {
+    //           print("Elelelelelelel");
+    //           print(element.documentID);
+    //         }));
 
     return StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
