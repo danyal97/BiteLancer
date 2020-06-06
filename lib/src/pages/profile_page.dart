@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                       image: DecorationImage(
                         image: AssetImage(
-                          "assets/images/breakfast.jpeg",
+                          "assets/images/avatar.png",
                         ),
                         fit: BoxFit.cover,
                       ),
