@@ -93,6 +93,7 @@ class _OptionPageState extends State<OptionPage> {
                                   setState(() {
                                     loading = true;
                                   });
+                                  final type = "Consumer";
                                   dynamic result;
                                   if (widget.label == "login") {
                                     result =
@@ -105,6 +106,7 @@ class _OptionPageState extends State<OptionPage> {
                                       widget.email,
                                       widget.password,
                                       widget.username,
+                                      type
                                     );
                                   }
 
@@ -150,6 +152,7 @@ class _OptionPageState extends State<OptionPage> {
                                   setState(() {
                                     loading = true;
                                   });
+                                  final type = "Caterer";
                                   dynamic result;
                                   if (widget.label == "login") {
                                     result =
@@ -162,6 +165,7 @@ class _OptionPageState extends State<OptionPage> {
                                       widget.email,
                                       widget.password,
                                       widget.username,
+                                      type
                                     );
                                   }
 

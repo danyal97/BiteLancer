@@ -34,16 +34,22 @@ class AuthService {
 
   // registeration
   Future registerWithEmailAndPassword(
-      String email, String password, String username) async {
+   
+      String email, String password, String username,String type) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
       FirebaseUser user = result.user;
+      user.sendEmailVerification();
       // print(user);
-
-      // await DatabaseService(uid: user.uid).updateUsername(username);
-
+      if(type == "Consumer"){
+      await DatabaseService(uid: user.uid).addBuyer(username);
+      }
+      else{
+        await DatabaseService(uid: user.uid).addSeller(username);
+      }
+      
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());
@@ -51,6 +57,24 @@ class AuthService {
     }
   }
 
+  someMethod() async {
+      FirebaseUser user = await FirebaseAuth.instance.currentUser();
+      print("Shahzaib");
+      print(user.uid);   
+      }
+      
+  Future changePassword(String password) async{
+  //Create an instance of the current user. 
+  FirebaseUser user = await FirebaseAuth.instance.currentUser();
+
+  //Pass in the password to updatePassword.
+  user.updatePassword(password).then((_){
+    print("Succesfull changed password");
+  }).catchError((error){
+    print("Password can't be changed" + error.toString());
+    //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
+  });
+  }    
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
