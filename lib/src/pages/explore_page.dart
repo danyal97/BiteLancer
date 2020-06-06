@@ -35,7 +35,7 @@ class _FavoritePageState extends State<FavoritePage> {
           // List<Food> foods = model.foods;
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: SearchField(),
+
             // child: RefreshIndicator(
             //   onRefresh: model.fetchFoods,
             //   child: ListView.builder(
