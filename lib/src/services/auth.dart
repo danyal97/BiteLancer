@@ -43,6 +43,7 @@ class AuthService {
       // print(user);
 
       await DatabaseService(uid: user.uid).updateUsername(username);
+
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());

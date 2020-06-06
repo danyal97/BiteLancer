@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodfreelancing/src/models/food_model.dart';
 import 'package:foodfreelancing/src/models/user.dart';
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
+import 'package:foodfreelancing/src/services/FoodItems.dart';
 import 'package:foodfreelancing/src/widgets/button.dart';
 import 'package:foodfreelancing/src/widgets/show_dailog.dart';
 import 'package:provider/provider.dart';
@@ -115,6 +116,8 @@ class _AddFoodItemState extends State<AddFoodItem> {
                                 print("Food description : " + description);
                                 print("Food price : " + price.toString());
                                 print("Food Dicount : " + discount.toString());
+                                FoodItems(uid: user.uid).addFoodItems(
+                                    title, category, description, price);
                               },
                               child: Button(
                                   btnText: widget.food != null
@@ -146,12 +149,6 @@ class _AddFoodItemState extends State<AddFoodItem> {
           "price": double.parse(price),
           "discount": discount != null ? double.parse(discount) : 0.0,
         };
-        print("Food title : " + title);
-        print("Food category : " + category);
-        print("Food description : " + description);
-        print("Food price : " + price.toString());
-        print("Food Dicount : " + discount.toString());
-
         final bool response = await updateFood(updatedFoodItem, widget.food.id);
         if (response) {
           Navigator.of(context).pop(); // to remove the alert Dialog
@@ -177,11 +174,6 @@ class _AddFoodItemState extends State<AddFoodItem> {
           price: double.parse(price),
           discount: double.parse(discount),
         );
-        print("Food title : " + food.name);
-        print("Food category : " + food.category);
-        print("Food description : " + food.description);
-        print("Food price : " + food.price.toString());
-        print("Food Dicount : " + food.discount.toString());
         bool value = await addFood(food);
         if (value) {
           Navigator.of(context).pop();
@@ -232,12 +224,13 @@ class _AddFoodItemState extends State<AddFoodItem> {
         if (value.isEmpty && hint == "Price") {
           return "The price is required";
         }
-        return "";
+        // return "";
       },
-      onSaved: (String value) {
+      onChanged: (String value) {
+        // print(value);
         if (hint == "Food Title") {
-          print("Food title : " + title);
           title = value;
+          print("Food title : " + title);
         }
         if (hint == "Category") {
           category = value;
@@ -245,18 +238,16 @@ class _AddFoodItemState extends State<AddFoodItem> {
         }
         if (hint == "Description") {
           description = value;
+          print("Food Description : " + description);
         }
         if (hint == "Price") {
           price = value;
+          print("Food Price : " + price);
         }
         if (hint == "Discount") {
           discount = value;
+          print("Food Discount : " + discount);
         }
-        print("Food title : " + title);
-        print("Food category : " + category);
-        print("Food description : " + description);
-        print("Food price : " + price.toString());
-        print("Food Dicount : " + discount.toString());
       },
     );
   }
