@@ -12,7 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("MAIN CALLED");
+    print("MAIN is CALLED");
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(home: App()),
