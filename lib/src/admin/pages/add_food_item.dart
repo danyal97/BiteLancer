@@ -85,7 +85,7 @@ class _AddFoodItemState extends State<AddFoodItem> {
                     _buildTextFormField("Category"),
                     _buildTextFormField("Description", maxLine: 5),
                     _buildTextFormField("Price"),
-                    _buildTextFormField("Discount"),
+                    // _buildTextFormField("Discount"),
                     SizedBox(
                       height: 70.0,
                     ),
@@ -118,6 +118,7 @@ class _AddFoodItemState extends State<AddFoodItem> {
                                 print("Food Dicount : " + discount.toString());
                                 FoodItems(uid: user.uid).addFoodItems(
                                     title, category, description, price);
+                                Navigator.of(context).pop();
                               },
                               child: Button(
                                   btnText: widget.food != null
@@ -205,9 +206,7 @@ class _AddFoodItemState extends State<AddFoodItem> {
                           : "",
       decoration: InputDecoration(hintText: "$hint"),
       maxLines: maxLine,
-      keyboardType: hint == "Price" || hint == "Discount"
-          ? TextInputType.number
-          : TextInputType.text,
+      keyboardType: hint == "Price" ? TextInputType.number : TextInputType.text,
       validator: (String value) {
         // String error
         if (value.isEmpty && hint == "Food Title") {
@@ -244,10 +243,10 @@ class _AddFoodItemState extends State<AddFoodItem> {
           price = value;
           print("Food Price : " + price);
         }
-        if (hint == "Discount") {
-          discount = value;
-          print("Food Discount : " + discount);
-        }
+        // if (hint == "Discount") {
+        //   discount = value;
+        //   print("Food Discount : " + discount);
+        // }
       },
     );
   }
