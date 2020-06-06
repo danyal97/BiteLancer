@@ -133,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           fontSize: 16.0,
                         ),  
                       ),
-                      Icon(Icons.check_circle,
+                      if (userinfo['verified']) Icon(Icons.check_circle,
                       color: Colors.blue),
                       ]),
                       SizedBox(
