@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodfreelancing/src/models/food_model.dart';
+import 'food_model.dart';
 
 class Cart extends ChangeNotifier {
   List<CartModel> items = [];
