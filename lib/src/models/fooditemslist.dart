@@ -3,5 +3,7 @@ class FoodItemsList {
   final String category;
   final String description;
   final String price;
-  FoodItemsList({this.title, this.category, this.description, this.price});
+  final String image;
+  FoodItemsList(
+      {this.title, this.category, this.description, this.price, this.image});
 }
