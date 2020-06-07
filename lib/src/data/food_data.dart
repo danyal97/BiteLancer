@@ -4,7 +4,7 @@ final foods = [
   Food(
     id: "1",
     name: "Haleem Caterers",
-    imagePath: "assets/images/breakfast.jpeg",
+    imagePath: "assets/images/avatar.png",
     category: "1",
     price: 22.0,
     discount: 33.5,
@@ -13,7 +13,7 @@ final foods = [
   Food(
     id: "2",
     name: "Shahzaib caterers",
-    imagePath: "assets/images/lunch.jpeg",
+    imagePath: "assets/images/avatar.png",
     category: "2",
     price: 12.0,
     discount: 34.5,

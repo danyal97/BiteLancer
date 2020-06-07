@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                 .map((buyer) => Food(
                       id: buyer.documentID,
                       name: buyer.data['Name'],
-                      imagePath: _foods2[0].imagePath,
+                      imagePath: _foods2[1].imagePath,
                       category: buyer.data['Address'],
                       discount: 20,
                       price: double.parse(buyer.data['Price']),

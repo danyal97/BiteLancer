@@ -51,7 +51,7 @@ class _BoughtFoodState extends State<BoughtFood> {
                   gradient: LinearGradient(
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
-                      colors: [Colors.black, Colors.black12])),
+                      colors: [])),
             ),
           ),
           Positioned(
@@ -70,8 +70,8 @@ class _BoughtFoodState extends State<BoughtFood> {
                       "Name: " + widget.name + "",
                       style: TextStyle(
                           fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black),
                     ),
 
                     //     RaisedButton(
