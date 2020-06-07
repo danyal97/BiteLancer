@@ -30,23 +30,25 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  // QuerySnapshot docs;
+  QuerySnapshot docs;
 
   Future retrieveBuyerDocuments() async {
-    return await Firestore.instance.collection("BuyerRequest").getDocuments();
+    return await Firestore.instance.collection("Buyer").getDocuments();
 
     // print("Document Printing Called");
     // // print(doc.documents.length);
     // print("Document Printing Called");
     // // var documents=document.documents;
-    // setState(() {
-    //   loading = false;
-    // });
+    //
   }
 
   Future retrieve() async {
-    var d = await retrieveBuyerDocuments();
-    print("dsdasdasdasd");
+    return await retrieveBuyerDocuments();
+  }
+
+  Future retrieve3() async {
+    var d = await retrieve();
+    print("Shabasssh");
     print(d.documents.length);
   }
 
@@ -54,12 +56,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     if (loading) {
-      retrieve();
+      retrieve3();
       return Loading();
     } else {
       return StreamBuilder<QuerySnapshot>(
           // initialData: docs,
-          stream: Firestore.instance.collection('BuyerRequest').snapshots(),
+          stream: Firestore.instance
+              .collection('BuyerRequest')
+              .document()
+              .collection("Requests")
+              .snapshots(),
           builder: (context, snapshot) {
             print("Document Length");
             print(snapshot.data.documents.length);
