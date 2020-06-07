@@ -132,14 +132,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               fontSize: 16.0,
                             ),
                           ),
-<<<<<<< HEAD
-                          // if (userinfo['verified']) Icon(Icons.check_circle,
-                          // color: Colors.blue),
-=======
                           // Neeedd to ask shahzaib
                           // if (userinfo['verified'])
                           //   Icon(Icons.check_circle, color: Colors.blue),
->>>>>>> d12991ef000023bc49204b124aaa6f4b2ccac3c4
                         ]),
                         SizedBox(
                           height: 10.0,
