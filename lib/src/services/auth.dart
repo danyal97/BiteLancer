@@ -41,7 +41,7 @@ class AuthService {
           email: email, password: password);
 
       FirebaseUser user = result.user;
-      user.sendEmailVerification();
+      // user.sendEmailVerification();
       // print(user);
       if(type == "Consumer"){
       await DatabaseService(uid: user.uid).addBuyer(username);
@@ -62,7 +62,7 @@ class AuthService {
       print("Shahzaib");
       print(user.uid);   
       }
-      
+
   Future changePassword(String password) async{
   //Create an instance of the current user. 
   FirebaseUser user = await FirebaseAuth.instance.currentUser();

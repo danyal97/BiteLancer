@@ -95,11 +95,7 @@ class _OptionPageState extends State<OptionPage> {
                                   });
                                   final type = "Consumer";
                                   dynamic result;
-                                  if (widget.label == "login") {
-                                    result =
-                                        await _auth.signInWithEmailAndPassword(
-                                            widget.email, widget.password);
-                                  } else if (widget.label == "signup") {
+                                   if (widget.label == "signup") {
                                     print("label Signup called");
                                     result = await _auth
                                         .registerWithEmailAndPassword(
@@ -154,11 +150,7 @@ class _OptionPageState extends State<OptionPage> {
                                   });
                                   final type = "Caterer";
                                   dynamic result;
-                                  if (widget.label == "login") {
-                                    result =
-                                        await _auth.signInWithEmailAndPassword(
-                                            widget.email, widget.password);
-                                  } else if (widget.label == "signup") {
+                                  if (widget.label == "signup") {
                                     print("label Signup called");
                                     result = await _auth
                                         .registerWithEmailAndPassword(

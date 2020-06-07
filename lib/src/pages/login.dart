@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool loading = false;
-
+final AuthService _auth = AuthService();
   // final _formKey = GlobalKey<FormState>();
   String error = "";
   String email = "";
@@ -95,16 +95,36 @@ class _LoginPageState extends State<LoginPage> {
                               )),
                           child: MaterialButton(
                             minWidth: double.infinity,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OptionPage(
-                                            email: email,
-                                            password: password,
-                                            label: "login",
-                                          )));
-                            },
+                            onPressed: 
+                             () async {
+                                  // loading = true;
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  dynamic result;
+                                    result =
+                                        await _auth.signInWithEmailAndPassword(email, password);
+
+                                  if (result is String) {
+                                    setState(() {
+                                      error = result.split(",")[1];
+                                      loading = false;
+                                    });
+                                  // } else {
+                                  //   Navigator.pop(context);
+                                  // }
+                                }
+                             },
+                            // () {
+                            //   Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //           builder: (context) => OptionPage(
+                            //                 email: email,
+                            //                 password: password,
+                            //                 label: "login",
+                            //               )));
+                            // },
                             height: 60,
                             color: Colors.greenAccent,
                             elevation: 0,
