@@ -208,7 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        AddBuyerRequest())).then((value) {
+                                        ChangePasswordPage())).then((value) {
                               setState(() {
                                 check = false;
                               });
