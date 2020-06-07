@@ -7,6 +7,15 @@ import 'package:foodfreelancing/src/widgets/button.dart';
 import 'package:foodfreelancing/src/widgets/show_dailog.dart';
 import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:foodfreelancing/src/services/database.dart';
+// import 'package:foodfreelancing/src/services/FoodItems.dart';
+import 'package:foodfreelancing/src/services/auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
+import 'package:foodfreelancing/src/shared/loading.dart';
 
 class AddFoodItem extends StatefulWidget {
   final Food food;
@@ -18,6 +27,75 @@ class AddFoodItem extends StatefulWidget {
 }
 
 class _AddFoodItemState extends State<AddFoodItem> {
+  var userinfo;
+  var id;
+  // bool check = false;
+  // bool check1 = true;
+  Future getUser(String uid) async {
+    userinfo = await foodItem.foodItems
+        .document(id)
+        .collection("FoodList")
+        .document(title)
+        .get()
+        .then((value) {
+      print(value.data['image']);
+      return value.data;
+    });
+
+    setState(() {
+      // print(userinfo['image']);
+      // check = true;
+    });
+  }
+
+  bool loading = false;
+
+  final AuthService _auth = AuthService();
+  final DatabaseService _database = DatabaseService();
+  final FoodItems foodItem = FoodItems();
+  String temporaryPath =
+      'https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/profilepictures%2Favatar.png?alt=media&token=6d1b2f61-f681-46f8-8292-c68c9b797c85';
+  File _image;
+  final picker = ImagePicker();
+  String _uploadedFileURL;
+  Future getImage() async {
+    setState(() {
+      loading = true;
+    });
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = File(pickedFile.path);
+
+      uploadFile();
+
+      print('File selected');
+    });
+  }
+
+  Future uploadFile() async {
+    print('File Uploading');
+    StorageReference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('Foodpictures/${Path.basename(_image.path)}}');
+    StorageUploadTask uploadTask = storageReference.putFile(_image);
+    await uploadTask.onComplete;
+    print('File Uploaded');
+    storageReference.getDownloadURL().then((fileURL) async {
+      // await foodItem.updateFoodPicture(id, fileURL, title);
+      setState(() {
+        print(fileURL);
+        print(fileURL);
+        print(fileURL);
+        _uploadedFileURL = fileURL;
+        temporaryPath = fileURL;
+        print(_uploadedFileURL);
+        loading = false;
+        print("shahahah");
+      });
+    });
+  }
+
   String title;
   String category;
   String description;
@@ -30,111 +108,128 @@ class _AddFoodItemState extends State<AddFoodItem> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    id = user.uid;
     print("Add Food Item Uid: " + user.uid);
-    return SafeArea(
-      child: WillPopScope(
-        onWillPop: () {
-          Navigator.of(context).pop(false);
-          return Future.value(false);
-        },
-        child: Scaffold(
-          key: _scaffoldStateKey,
-          appBar: AppBar(
-            elevation: 0.0,
-            backgroundColor: Colors.white,
-            title: Text(
-              widget.food != null ? "Update Food Item" : "Add Food Item",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold),
-            ),
-            centerTitle: true,
-            leading: IconButton(
-              icon: Icon(
-                Icons.close,
-                color: Colors.black,
-              ),
-              onPressed: () {
+
+    return loading
+        ? Loading()
+        : SafeArea(
+            child: WillPopScope(
+              onWillPop: () {
                 Navigator.of(context).pop(false);
+                return Future.value(false);
               },
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              // width: MediaQuery.of(context).size.width,
-              // height: MediaQuery.of(context).size.height,
-              child: Form(
-                key: _foodItemFormKey,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(bottom: 15.0),
-                      width: MediaQuery.of(context).size.width,
-                      height: 170.0,
-                      decoration: BoxDecoration(
-                        // color: Colors.red,
-                        borderRadius: BorderRadius.circular(10.0),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/noimage.png"),
-                        ),
+              child: Scaffold(
+                key: _scaffoldStateKey,
+                appBar: AppBar(
+                  elevation: 0.0,
+                  backgroundColor: Colors.white,
+                  title: Text(
+                    widget.food != null ? "Update Food Item" : "Add Food Item",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  centerTitle: true,
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                  ),
+                ),
+                body: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    // width: MediaQuery.of(context).size.width,
+                    // height: MediaQuery.of(context).size.height,
+                    child: Form(
+                      key: _foodItemFormKey,
+                      child: Column(
+                        children: <Widget>[
+                          FlatButton(
+                            onPressed: getImage,
+                            child: Container(
+                              margin: EdgeInsets.only(bottom: 15.0),
+                              width: MediaQuery.of(context).size.width,
+                              height: 170.0,
+                              decoration: BoxDecoration(
+                                // color: Colors.red,
+                                borderRadius: BorderRadius.circular(10.0),
+
+                                image: DecorationImage(
+                                  image: NetworkImage(temporaryPath),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          _buildTextFormField("Food Title"),
+                          _buildTextFormField("Category"),
+                          _buildTextFormField("Description", maxLine: 5),
+                          _buildTextFormField("Price"),
+                          // _buildTextFormField("Discount"),
+                          SizedBox(
+                            height: 70.0,
+                          ),
+                          ScopedModelDescendant(
+                            builder: (BuildContext context, Widget child,
+                                MainModel model) {
+                              return GestureDetector(
+                                  onTap: () {
+                                    print("Food title : " + title);
+                                    print("Food category : " + category);
+                                    print("Food description : " + description);
+                                    print("Food price : " + price.toString());
+                                    print("Food Dicount : " +
+                                        discount.toString());
+                                    onSubmit(model.addFood, model.updateFood);
+                                    if (model.isLoading) {
+                                      // show loading progess indicator
+                                      showLoadingIndicator(
+                                          context,
+                                          widget.food != null
+                                              ? "Updating food..."
+                                              : "Adding food...");
+                                    }
+                                  },
+                                  child: FlatButton(
+                                    onPressed: () async {
+                                      print("Food title : " + title);
+                                      print("Food category : " + category);
+                                      print(
+                                          "Food description : " + description);
+                                      print("Food price : " + price.toString());
+                                      print("Food Dicount : " +
+                                          discount.toString());
+                                      FoodItems(uid: user.uid).addFoodItems(
+                                          title,
+                                          category,
+                                          description,
+                                          price,
+                                          temporaryPath);
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Button(
+                                        btnText: widget.food != null
+                                            ? "Update Food Item"
+                                            : "Add Food Item"),
+                                  ));
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                    _buildTextFormField("Food Title"),
-                    _buildTextFormField("Category"),
-                    _buildTextFormField("Description", maxLine: 5),
-                    _buildTextFormField("Price"),
-                    // _buildTextFormField("Discount"),
-                    SizedBox(
-                      height: 70.0,
-                    ),
-                    ScopedModelDescendant(
-                      builder: (BuildContext context, Widget child,
-                          MainModel model) {
-                        return GestureDetector(
-                            onTap: () {
-                              print("Food title : " + title);
-                              print("Food category : " + category);
-                              print("Food description : " + description);
-                              print("Food price : " + price.toString());
-                              print("Food Dicount : " + discount.toString());
-                              onSubmit(model.addFood, model.updateFood);
-                              if (model.isLoading) {
-                                // show loading progess indicator
-                                showLoadingIndicator(
-                                    context,
-                                    widget.food != null
-                                        ? "Updating food..."
-                                        : "Adding food...");
-                              }
-                            },
-                            child: FlatButton(
-                              onPressed: () async {
-                                print("Food title : " + title);
-                                print("Food category : " + category);
-                                print("Food description : " + description);
-                                print("Food price : " + price.toString());
-                                print("Food Dicount : " + discount.toString());
-                                FoodItems(uid: user.uid).addFoodItems(
-                                    title, category, description, price);
-                                Navigator.of(context).pop();
-                              },
-                              child: Button(
-                                  btnText: widget.food != null
-                                      ? "Update Food Item"
-                                      : "Add Food Item"),
-                            ));
-                      },
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
   }
 
   void onSubmit(Function addFood, Function updateFood) async {
