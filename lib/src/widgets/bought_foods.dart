@@ -64,6 +64,8 @@ class _BoughtFoodState extends State<BoughtFood> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    //Row(
+                    // children: <Widget>[
                     Text(
                       widget.name,
                       style: TextStyle(
@@ -71,31 +73,39 @@ class _BoughtFoodState extends State<BoughtFood> {
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
+                    //     RaisedButton(
+                    //       elevation: 5.0,
+                    //       onPressed: () => print("Button Pressed"),
+                    //       padding: EdgeInsets.all(2.0),
+                    //       child: new Text("Send Req"),
+                    //     ),
+                    //   ],
+                    // ),
                     Row(
                       children: <Widget>[
                         Icon(
                           Icons.star,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.yellow,
                           size: 16.0,
                         ),
                         Icon(
                           Icons.star,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.yellow,
                           size: 16.0,
                         ),
                         Icon(
                           Icons.star,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.yellow,
                           size: 16.0,
                         ),
                         Icon(
                           Icons.star,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.yellow,
                           size: 16.0,
                         ),
                         Icon(
                           Icons.star,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.yellow,
                           size: 16.0,
                         ),
                         SizedBox(
@@ -112,14 +122,16 @@ class _BoughtFoodState extends State<BoughtFood> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    Text(
-                      widget.price.toString(),
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orangeAccent),
-                    ),
-                    Text("Min order", style: TextStyle(color: Colors.grey))
+                    RaisedButton(
+                        elevation: 5.0,
+                        color: Colors.yellow,
+                        onPressed: () => print("Button Pressed"),
+                        padding: EdgeInsets.all(2.0),
+                        child: new Text("Send Req"),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.yellow[50]),
+                        )),
                   ],
                 ),
               ],
