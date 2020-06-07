@@ -8,7 +8,7 @@ final foods = [
     category: "1",
     price: 22.0,
     discount: 33.5,
-    ratings: 99.0,
+    ratings: "99",
   ),
   Food(
     id: "2",
@@ -17,6 +17,6 @@ final foods = [
     category: "2",
     price: 12.0,
     discount: 34.5,
-    ratings: 69.0,
+    ratings: "69",
   ),
 ];

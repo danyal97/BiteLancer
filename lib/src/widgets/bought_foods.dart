@@ -7,7 +7,7 @@ class BoughtFood extends StatefulWidget {
   final String category;
   final double price;
   final double discount;
-  final double ratings;
+  final String ratings;
 
   BoughtFood(
       {this.id,
@@ -45,7 +45,7 @@ class _BoughtFoodState extends State<BoughtFood> {
             left: 0.0,
             bottom: 0.0,
             width: 340.0,
-            height: 60.0,
+            height: 70.0,
             child: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -56,7 +56,7 @@ class _BoughtFoodState extends State<BoughtFood> {
           ),
           Positioned(
             left: 10.0,
-            bottom: 10.0,
+            bottom: 60.0,
             right: 10.0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,12 +67,13 @@ class _BoughtFoodState extends State<BoughtFood> {
                     //Row(
                     // children: <Widget>[
                     Text(
-                      widget.name,
+                      "Name: " + widget.name + "",
                       style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
+
                     //     RaisedButton(
                     //       elevation: 5.0,
                     //       onPressed: () => print("Button Pressed"),
@@ -81,41 +82,21 @@ class _BoughtFoodState extends State<BoughtFood> {
                     //     ),
                     //   ],
                     // ),
-                    Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 16.0,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 16.0,
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Text(
-                          "(" + widget.ratings.toString() + " Reviews)",
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
+                    Text(
+                      "Description: " + widget.ratings + "",
+                      style: TextStyle(
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                      maxLines: 8,
+                    ),
+                    Text(
+                      "Address:  : " + widget.category + "",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "Price:  : " + widget.price.toString() + "",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ],
                 ),

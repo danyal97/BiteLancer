@@ -6,7 +6,7 @@ class Food {
   final String category;
   final double price;
   final double discount;
-  final double ratings;
+  final String ratings;
 
   Food(
       {this.id,
