@@ -4,6 +4,7 @@ import 'package:foodfreelancing/src/models/buyer_request.dart';
 // import 'package:foodfreelancing/src/screens/home/food_item_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodfreelancing/src/models/user.dart';
+import 'package:random_string/random_string.dart';
 
 class BuyerRequests {
   final String uid;
@@ -33,7 +34,7 @@ class BuyerRequests {
         break;
       }
     }
-    await buyerRequestAll.document(uid).setData({
+    await buyerRequestAll.document(uid + randomAlphaNumeric(10)).setData({
       'Name': buyerName,
       'Address': buyerAddress ?? "",
       'PhoneNumber': buyerPhoneNumber ?? "",
