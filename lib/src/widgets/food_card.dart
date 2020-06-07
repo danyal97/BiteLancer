@@ -37,30 +37,65 @@ class FoodCard extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Title :       $title",
+                  Row(children: <Widget>[
+                    Text(
+                    "Title:",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.cyan,
+                      fontStyle: FontStyle.normal,
+                      color: Colors.black,
                     ),
                   ),
                   Text(
-                    "Catgeory :      $categoryName",
+                    "  $title",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      fontStyle: FontStyle.normal,
+                      color: Colors.blueAccent,
+                    ),
+                  )
+                  ],)
+                  ,
+                  Row(children: <Widget>[
+                    Text(
+                    "Catgeory :  ",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
                         fontStyle: FontStyle.italic,
-                        color: Colors.deepPurpleAccent),
+                        color: Colors.black),
                   ),
                   Text(
-                    "Price :      Rs:$price",
+                    "$categoryName",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.blueAccent),
+                  ),
+                  ],)
+                  ,
+                  Row(children: <Widget>[
+                    Text(
+                    "Price :  ",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,
                         fontSize: 16.0),
-                  )
+                  ),
+                  Text(
+                    "Rs. $price ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 16.0,
+                         color: Colors.red),
+                  ),
+                  ],)
+                  ,
+                  
                 ],
               ),
             ],
