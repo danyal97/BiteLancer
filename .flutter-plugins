@@ -1,10 +1,10 @@
 # This is a generated file; do not edit or check into version control.
-cloud_firestore=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore-0.13.6\\
-cloud_firestore_web=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore_web-0.1.1+2\\
-firebase_auth=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth-0.16.1\\
-firebase_auth_web=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth_web-0.1.3+1\\
-firebase_core=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-0.4.5\\
-firebase_core_web=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-0.1.1+2\\
-firebase_storage=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_storage-3.1.6\\
-flutter_plugin_android_lifecycle=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.8\\
-image_picker=F:\\flutter_windows\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker-0.6.7+1\\
+cloud_firestore=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore-0.13.6\\
+cloud_firestore_web=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore_web-0.1.1+2\\
+firebase_auth=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth-0.16.1\\
+firebase_auth_web=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth_web-0.1.3+1\\
+firebase_core=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-0.4.5\\
+firebase_core_web=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-0.1.1+2\\
+firebase_storage=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_storage-3.1.6\\
+flutter_plugin_android_lifecycle=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.8\\
+image_picker=D:\\SOFTWARES SETUP\\flutter_windows_v1.12.13+hotfix.9-stable\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker-0.6.7+1\\

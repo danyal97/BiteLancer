@@ -33,6 +33,9 @@ class _FoodCategoryState extends State<FoodCategory> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.documents.length > 0) {
+            // print("Image Src");
+            // print(snapshot.data.documents[0].data['image']);
+            // print("Image Src");
             List<FoodItemsList> foods = snapshot.data.documents
                 .map(
                   (foodTitles) => FoodItemsList(
@@ -40,24 +43,28 @@ class _FoodCategoryState extends State<FoodCategory> {
                       price: foodTitles.data['Price'] ?? 0,
                       category: foodTitles.data['Category'] ?? " ",
                       description: foodTitles.data['Description'] ?? " ",
-                      image:
-                          foodTitles.data['image'] ?? categories[0].imagePath),
+                      image: foodTitles.data['image'] ?? ""),
                 )
                 .toList();
             print(foods.length);
 
             return Container(
-              height: 80.0,
+              height: 120.0,
+              width: 180.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: foods.length,
                 itemBuilder: (BuildContext context, int index) {
                   // print("Category called");
-                  // print(foods[0].category);
+                  print("Image");
+                  print(foods[index].image.toString());
+                  print("Image");
+
                   return FoodCard(
                     categoryName: foods[index].category,
-                    imagePath: foods[0].image,
-                    numberOfItems: foods[index].price.length,
+                    title: foods[index].title,
+                    imagePath: foods[index].image.toString(),
+                    price: foods[index].price,
                     // numberOfItems: _categories[index].numberOfItems,
                   );
                 },

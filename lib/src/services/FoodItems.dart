@@ -27,6 +27,9 @@ class FoodItems {
         break;
       }
     }
+    // print("Image Path In Food Items");
+    // print(image);
+    // print("Image Path Found");
     if (documentIdFound) {
       return await foodItems
           .document(uid)
@@ -36,9 +39,7 @@ class FoodItems {
         'Category': foodCategory,
         'Description': foodDescription,
         'Price': price,
-        'image': image.length > 0
-            ? image
-            : 'https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/profilepictures%2Favatar.png?alt=media&token=6d1b2f61-f681-46f8-8292-c68c9b797c85',
+        'image': image,
       });
     } else {
       return await foodItems
@@ -49,8 +50,7 @@ class FoodItems {
         'Category': foodCategory,
         'Description': foodDescription,
         'Price': price,
-        'image':
-            'https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/profilepictures%2Favatar.png?alt=media&token=6d1b2f61-f681-46f8-8292-c68c9b797c85',
+        'image': image,
       });
     }
   }

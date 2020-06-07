@@ -71,8 +71,10 @@ class _MainScreenState extends State<MainScreen> {
               ListTile(
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => AddFoodItem()));
+                  try {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => AddFoodItem()));
+                  } catch (e) {}
                 },
                 leading: Icon(Icons.list),
                 title: Text(
