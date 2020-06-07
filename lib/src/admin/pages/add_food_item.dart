@@ -54,14 +54,12 @@ class _AddFoodItemState extends State<AddFoodItem> {
   final DatabaseService _database = DatabaseService();
   final FoodItems foodItem = FoodItems();
   String temporaryPath =
-      'https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/profilepictures%2Favatar.png?alt=media&token=6d1b2f61-f681-46f8-8292-c68c9b797c85';
-  File _image;
+      "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2Fdownload.png?alt=media&token=05879b8b-1ca9-4a88-9dd1-6e0685f5e231";
+        File _image;
   final picker = ImagePicker();
   String _uploadedFileURL;
   Future getImage() async {
-    setState(() {
-      loading = true;
-    });
+    
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
@@ -74,6 +72,9 @@ class _AddFoodItemState extends State<AddFoodItem> {
   }
 
   Future uploadFile() async {
+    setState(() {
+      loading = true;
+    });
     print('File Uploading');
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
@@ -154,16 +155,16 @@ class _AddFoodItemState extends State<AddFoodItem> {
                           FlatButton(
                             onPressed: getImage,
                             child: Container(
-                              margin: EdgeInsets.only(bottom: 15.0),
+                              margin: EdgeInsets.only(bottom: 20.0),
                               width: MediaQuery.of(context).size.width,
                               height: 170.0,
                               decoration: BoxDecoration(
                                 // color: Colors.red,
-                                borderRadius: BorderRadius.circular(10.0),
+                                borderRadius: BorderRadius.circular(5.0),
 
                                 image: DecorationImage(
                                   image: NetworkImage(temporaryPath),
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
                             ),
