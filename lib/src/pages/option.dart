@@ -93,18 +93,16 @@ class _OptionPageState extends State<OptionPage> {
                                   setState(() {
                                     loading = true;
                                   });
+                                  final type = "Consumer";
                                   dynamic result;
-                                  if (widget.label == "login") {
-                                    result =
-                                        await _auth.signInWithEmailAndPassword(
-                                            widget.email, widget.password);
-                                  } else if (widget.label == "signup") {
+                                   if (widget.label == "signup") {
                                     print("label Signup called");
                                     result = await _auth
                                         .registerWithEmailAndPassword(
                                       widget.email,
                                       widget.password,
                                       widget.username,
+                                      type
                                     );
                                   }
 
@@ -150,18 +148,16 @@ class _OptionPageState extends State<OptionPage> {
                                   setState(() {
                                     loading = true;
                                   });
+                                  final type = "Caterer";
                                   dynamic result;
-                                  if (widget.label == "login") {
-                                    result =
-                                        await _auth.signInWithEmailAndPassword(
-                                            widget.email, widget.password);
-                                  } else if (widget.label == "signup") {
+                                  if (widget.label == "signup") {
                                     print("label Signup called");
                                     result = await _auth
                                         .registerWithEmailAndPassword(
                                       widget.email,
                                       widget.password,
                                       widget.username,
+                                      type
                                     );
                                   }
 

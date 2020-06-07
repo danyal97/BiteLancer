@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:foodfreelancing/src/animation/FadeAnimation.dart';
 import 'package:foodfreelancing/src/pages/option.dart';
 import 'package:foodfreelancing/src/services/auth.dart';
-
-class LoginPage extends StatefulWidget {
-  final Function toggleView;
-
-  LoginPage({this.toggleView});
+import 'package:foodfreelancing/src/services/database.dart';
+class EditProfile extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _EditProfileState createState() => _EditProfileState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _EditProfileState extends State<EditProfile> {
   bool loading = false;
-final AuthService _auth = AuthService();
+final DatabaseService _database = DatabaseService();
   // final _formKey = GlobalKey<FormState>();
   String error = "";
-  String email = "";
-  String password = "";
+  String phoneNumber = "";
+  String address = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +24,6 @@ final AuthService _auth = AuthService();
         elevation: 0,
         brightness: Brightness.light,
         backgroundColor: Colors.white,
-        // leading: IconButton(
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        //   icon: Icon(
-        //     Icons.arrow_back_ios,
-        //     size: 20,
-        //     color: Colors.black,
-        //   ),
-        // ),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -53,7 +40,7 @@ final AuthService _auth = AuthService();
                       FadeAnimation(
                           1,
                           Text(
-                            "Login",
+                            "Edit Profile",
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           )),
@@ -63,26 +50,25 @@ final AuthService _auth = AuthService();
                       FadeAnimation(
                           1.2,
                           Text(
-                            "Login to your account",
+                            "Add necessary data to get verified",
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[700]),
                           )),
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    padding: EdgeInsets.symmetric(horizontal: 35),
                     child: Column(
                       children: <Widget>[
-                        FadeAnimation(1.2, makeInput(label: "Email")),
-                        FadeAnimation(1.3,
-                            makeInput(label: "Password", obscureText: true)),
+                         FadeAnimation(1.2, makeInput(label: "Phone number", obscureText: false)),
+                         FadeAnimation(1.3, makeInput(label: "Address", obscureText: false)),
                       ],
                     ),
                   ),
                   FadeAnimation(
                       1.4,
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        padding: EdgeInsets.symmetric(horizontal: 50),
                         child: Container(
                           padding: EdgeInsets.only(top: 3, left: 3),
                           decoration: BoxDecoration(
@@ -95,43 +81,26 @@ final AuthService _auth = AuthService();
                               )),
                           child: MaterialButton(
                             minWidth: double.infinity,
-                            onPressed: 
-                             () async {
-                                  // loading = true;
-                                  setState(() {
-                                    loading = true;
-                                  });
-                                  dynamic result;
-                                    result =
-                                        await _auth.signInWithEmailAndPassword(email, password);
-
-                                  if (result is String) {
-                                    setState(() {
-                                      error = result.split(",")[1];
-                                      loading = false;
-                                    });
-                                  // } else {
-                                  //   Navigator.pop(context);
-                                  // }
-                                }
-                             },
-                            // () {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) => OptionPage(
-                            //                 email: email,
-                            //                 password: password,
-                            //                 label: "login",
-                            //               )));
-                            // },
-                            height: 60,
+                            onPressed:  () async {
+                             dynamic result 
+                            = await _database.updateProfile(phoneNumber,address);
+                            if (result is String) {
+                              setState(() {
+                                
+                              });
+                              Navigator.pop(context);
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          
+                            },
+                            height: 52,
                             color: Colors.greenAccent,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Text(
-                              "Login",
+                              "Submit",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 18),
                             ),
@@ -143,13 +112,13 @@ final AuthService _auth = AuthService();
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Don't have an account?"),
                           GestureDetector(
                             onTap: () {
-                              widget.toggleView();
+                              // widget.toggleView();
+                              Navigator.pop(context);
                             },
                             child: Text(
-                              "Sign up",
+                              "Go Back",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 20.0),
                             ),
@@ -203,55 +172,20 @@ final AuthService _auth = AuthService();
           ),
           onChanged: (value) {
             setState(() {
-              if (label == "Email") {
-                email = value;
-                print("Email : " + email);
+              if (label == "Phone number") {
+                phoneNumber = value;
+                print("Phone number : " + phoneNumber);
               } else {
-                password = value;
-                print("Password : " + password);
+                address = value;
+                print("Password : " + address);
               }
             });
           },
         ),
         SizedBox(
-          height: 30,
+          height: 40,
         ),
       ],
     );
   }
 }
-
-// class LoginPage extends StatelessWidget {
-
-//   @override
-//   Widget build(BuildContext context) {}
-
-//   Widget makeInput({label, obscureText = false}) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: <Widget>[
-//         Text(
-//           label,
-//           style: TextStyle(
-//               fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
-//         ),
-//         SizedBox(
-//           height: 5,
-//         ),
-//         TextField(
-//           obscureText: obscureText,
-//           decoration: InputDecoration(
-//             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-//             enabledBorder: OutlineInputBorder(
-//                 borderSide: BorderSide(color: Colors.grey[400])),
-//             border: OutlineInputBorder(
-//                 borderSide: BorderSide(color: Colors.grey[400])),
-//           ),
-//         ),
-//         SizedBox(
-//           height: 30,
-//         ),
-//       ],
-//     );
-//   }
-// }

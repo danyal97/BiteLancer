@@ -5,17 +5,18 @@ import '../pages/home_page.dart';
 import '../pages/order_page.dart';
 import '../pages/explore_page.dart';
 import '../pages/profile_page.dart';
+import 'package:foodfreelancing/src/pages/buyer_request_page.dart';
 
-class MainScreen extends StatefulWidget {
+class BuyerMainScreen extends StatefulWidget {
   final MainModel model;
 
-  MainScreen({this.model});
+  BuyerMainScreen({this.model});
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _BuyerMainScreenState createState() => _BuyerMainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _BuyerMainScreenState extends State<BuyerMainScreen> {
   int currentTab = 0;
 
   // Pages
@@ -72,13 +73,23 @@ class _MainScreenState extends State<MainScreen> {
                 onTap: () {
                   Navigator.of(context).pop();
                   try {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => AddFoodItem()));
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (BuildContext context) => AddFoodItem()));
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        AddBuyerRequest()));
+                                        // .then((value) {
+                              // setState(() {
+                              //   check = false;
+                              // });
+                            // });
                   } catch (e) {}
                 },
                 leading: Icon(Icons.list),
                 title: Text(
-                  "Add food Item",
+                  "Add Request",
                   style: TextStyle(fontSize: 16.0),
                 ),
               )

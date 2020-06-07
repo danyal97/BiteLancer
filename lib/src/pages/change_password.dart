@@ -3,15 +3,17 @@ import 'package:foodfreelancing/src/animation/FadeAnimation.dart';
 import 'package:foodfreelancing/src/pages/option.dart';
 import 'package:foodfreelancing/src/services/auth.dart';
 
-class LoginPage extends StatefulWidget {
+
+class ChangePasswordPage extends StatefulWidget {
+  @override
   final Function toggleView;
 
-  LoginPage({this.toggleView});
-  @override
-  _LoginPageState createState() => _LoginPageState();
+  ChangePasswordPage({this.toggleView});
+
+  _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
   bool loading = false;
 final AuthService _auth = AuthService();
   // final _formKey = GlobalKey<FormState>();
@@ -53,7 +55,7 @@ final AuthService _auth = AuthService();
                       FadeAnimation(
                           1,
                           Text(
-                            "Login",
+                            "Change Password",
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           )),
@@ -63,26 +65,25 @@ final AuthService _auth = AuthService();
                       FadeAnimation(
                           1.2,
                           Text(
-                            "Login to your account",
+                            "Change password of your account",
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[700]),
                           )),
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    padding: EdgeInsets.symmetric(horizontal: 35),
                     child: Column(
                       children: <Widget>[
-                        FadeAnimation(1.2, makeInput(label: "Email")),
                         FadeAnimation(1.3,
-                            makeInput(label: "Password", obscureText: true)),
+                            makeInput(label: "New Password", obscureText: true)),
                       ],
                     ),
                   ),
                   FadeAnimation(
                       1.4,
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        padding: EdgeInsets.symmetric(horizontal: 50),
                         child: Container(
                           padding: EdgeInsets.only(top: 3, left: 3),
                           decoration: BoxDecoration(
@@ -95,43 +96,34 @@ final AuthService _auth = AuthService();
                               )),
                           child: MaterialButton(
                             minWidth: double.infinity,
-                            onPressed: 
-                             () async {
-                                  // loading = true;
-                                  setState(() {
-                                    loading = true;
-                                  });
-                                  dynamic result;
-                                    result =
-                                        await _auth.signInWithEmailAndPassword(email, password);
-
-                                  if (result is String) {
-                                    setState(() {
-                                      error = result.split(",")[1];
-                                      loading = false;
-                                    });
-                                  // } else {
-                                  //   Navigator.pop(context);
-                                  // }
-                                }
-                             },
-                            // () {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) => OptionPage(
-                            //                 email: email,
-                            //                 password: password,
-                            //                 label: "login",
-                            //               )));
-                            // },
-                            height: 60,
+                            onPressed:  () async {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => OptionPage(
+                              //               email: email,
+                              //               password: password,
+                              //               label: "login",
+                              //             )));
+                             
+                             dynamic result = await _auth.changePassword(password);
+                            if (result is String) {
+                              setState(() {
+                                
+                              });
+                              Navigator.pop(context);
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          
+                            },
+                            height: 52,
                             color: Colors.greenAccent,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             child: Text(
-                              "Login",
+                              "Submit",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 18),
                             ),
@@ -143,13 +135,13 @@ final AuthService _auth = AuthService();
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Don't have an account?"),
                           GestureDetector(
                             onTap: () {
-                              widget.toggleView();
+                              // widget.toggleView();
+                              Navigator.pop(context);
                             },
                             child: Text(
-                              "Sign up",
+                              "Go Back",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 20.0),
                             ),
@@ -214,44 +206,9 @@ final AuthService _auth = AuthService();
           },
         ),
         SizedBox(
-          height: 30,
+          height: 40,
         ),
       ],
     );
   }
 }
-
-// class LoginPage extends StatelessWidget {
-
-//   @override
-//   Widget build(BuildContext context) {}
-
-//   Widget makeInput({label, obscureText = false}) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: <Widget>[
-//         Text(
-//           label,
-//           style: TextStyle(
-//               fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black87),
-//         ),
-//         SizedBox(
-//           height: 5,
-//         ),
-//         TextField(
-//           obscureText: obscureText,
-//           decoration: InputDecoration(
-//             contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-//             enabledBorder: OutlineInputBorder(
-//                 borderSide: BorderSide(color: Colors.grey[400])),
-//             border: OutlineInputBorder(
-//                 borderSide: BorderSide(color: Colors.grey[400])),
-//           ),
-//         ),
-//         SizedBox(
-//           height: 30,
-//         ),
-//       ],
-//     );
-//   }
-// }

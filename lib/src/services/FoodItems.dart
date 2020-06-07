@@ -13,9 +13,11 @@ class FoodItems {
   String descriptionName;
 
   FoodItems({this.uid});
+
   final CollectionReference foodItems = Firestore.instance.collection("Task");
+
   Future addFoodItems(String foodTitle, String foodCategory,
-      String foodDescription, String price) async {
+      String foodDescription, String price, String image) async {
     QuerySnapshot docs = await foodItems.getDocuments();
     var listdocs = _userFromFoodList(docs);
     bool documentIdFound = false;
@@ -25,6 +27,9 @@ class FoodItems {
         break;
       }
     }
+    // print("Image Path In Food Items");
+    // print(image);
+    // print("Image Path Found");
     if (documentIdFound) {
       return await foodItems
           .document(uid)
@@ -34,6 +39,7 @@ class FoodItems {
         'Category': foodCategory,
         'Description': foodDescription,
         'Price': price,
+        'image': image,
       });
     } else {
       return await foodItems
@@ -44,6 +50,7 @@ class FoodItems {
         'Category': foodCategory,
         'Description': foodDescription,
         'Price': price,
+        'image': image,
       });
     }
   }
@@ -59,7 +66,8 @@ class FoodItems {
               title: foodTitles.documentID ?? " ",
               price: foodTitles.data['Price'] ?? 0,
               category: foodTitles.data['Category'] ?? " ",
-              description: foodTitles.data['Description'] ?? " "),
+              description: foodTitles.data['Description'] ?? " ",
+              image: foodTitles.data['image'] ?? ""),
         )
         .toList();
   }
@@ -72,37 +80,17 @@ class FoodItems {
         .map((event) => _foodItemListFromSnapshot(event));
   }
 
-  List<FoodItemsList> get initialFoodList {
-    List<FoodItemsList> r;
-    StreamSubscription<QuerySnapshot> snapshot = foodItems
-        .document(uid)
-        .collection("FoodList")
-        .snapshots()
-        .listen((event) {
-      r = event.documents.map((foodTitles) => FoodItemsList(
-          title: foodTitles.documentID ?? " ",
-          price: foodTitles.data['Price'] ?? 0,
-          category: foodTitles.data['Category'] ?? " ",
-          description: foodTitles.data['Description'] ?? " "));
-    });
-    return r;
+  Future updateFoodPicture(String uid, String img, String foodTitle) async {
+    try {
+      print("Update Called");
+      return await foodItems
+          .document(uid)
+          .collection("FoodList")
+          .document(foodTitle)
+          .setData({'image': img});
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
   }
-
-  // Future<List<User>> allDocumentIds() async {
-  //   QuerySnapshot docs =
-  //       await Firestore.instance.collection("Task").getDocuments();
-  //   // docs.documents.forEach((element) {
-  //   //   element.data.forEach((key, value) {
-  //   //     print(key);
-  //   //   });
-  //   // });
-  //   // var listdocs = _userFromFoodList(docs);
-  //   // print(listdocs);
-  //   // List<User> docids;
-  //   // for (var doc in listdocs) {
-  //   //   print(doc.uid);
-  //   //   docids.add(User(uid: doc.uid));
-  //   // }
-  //   // return docids;
-  // }
 }

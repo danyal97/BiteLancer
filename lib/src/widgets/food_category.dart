@@ -18,13 +18,6 @@ class FoodCategory extends StatefulWidget {
 }
 
 class _FoodCategoryState extends State<FoodCategory> {
-//   FireStore.getCollRegistrationNumbers().get()
-// .then(querySnapshot => {
-//     querySnapshot.forEach(doc => {
-//         console.log(doc.id);
-//     });
-// });
-
   final List<Category> _categories = categories;
   @override
 
@@ -32,15 +25,6 @@ class _FoodCategoryState extends State<FoodCategory> {
 
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-
-    Firestore.instance
-        .collection("Task")
-        .getDocuments()
-        .then((value) => value.documents.forEach((element) {
-              print("Elelelelelelel");
-              print(element.documentID);
-            }));
-
     return StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
             .collection('Task')
@@ -49,29 +33,38 @@ class _FoodCategoryState extends State<FoodCategory> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.documents.length > 0) {
+            // print("Image Src");
+            // print(snapshot.data.documents[0].data['image']);
+            // print("Image Src");
             List<FoodItemsList> foods = snapshot.data.documents
                 .map(
                   (foodTitles) => FoodItemsList(
                       title: foodTitles.documentID ?? " ",
                       price: foodTitles.data['Price'] ?? 0,
                       category: foodTitles.data['Category'] ?? " ",
-                      description: foodTitles.data['Description'] ?? " "),
+                      description: foodTitles.data['Description'] ?? " ",
+                      image: foodTitles.data['image'] ?? ""),
                 )
                 .toList();
             print(foods.length);
 
             return Container(
-              height: 80.0,
+              height: 120.0,
+              width: 180.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: foods.length,
                 itemBuilder: (BuildContext context, int index) {
                   // print("Category called");
-                  // print(foods[0].category);
+                  print("Image");
+                  print(foods[index].image.toString());
+                  print("Image");
+
                   return FoodCard(
                     categoryName: foods[index].category,
-                    imagePath: _categories[0].imagePath,
-                    numberOfItems: foods[index].price.length,
+                    title: foods[index].title,
+                    imagePath: foods[index].image.toString(),
+                    price: foods[index].price,
                     // numberOfItems: _categories[index].numberOfItems,
                   );
                 },
