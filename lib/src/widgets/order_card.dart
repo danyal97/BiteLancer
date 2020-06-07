@@ -14,35 +14,35 @@ class _OrderCardState extends State<OrderCard> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xFFD3D3D3), width: 2.0),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              width: 45.0,
-              height: 73.0,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.0,
-                ),
-                child: Column(
-                  children: <Widget>[
-                    InkWell(
-                        onTap: () {},
-                        child: Icon(Icons.keyboard_arrow_up,
-                            color: Color(0xFFD3D3D3))),
-                    Text(
-                      "0",
-                      style: TextStyle(fontSize: 18.0, color: Colors.grey),
-                    ),
-                    InkWell(
-                        onTap: () {},
-                        child: Icon(Icons.keyboard_arrow_down,
-                            color: Color(0xFFD3D3D3))),
-                  ],
-                ),
-              ),
-            ),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     border: Border.all(color: Color(0xFFD3D3D3), width: 2.0),
+            //     borderRadius: BorderRadius.circular(10.0),
+            //   ),
+            //   width: 45.0,
+            //   height: 73.0,
+            //   child: Padding(
+            //     padding: EdgeInsets.symmetric(
+            //       horizontal: 10.0,
+            //     ),
+            //     child: Column(
+            //       children: <Widget>[
+            //         InkWell(
+            //             onTap: () {},
+            //             child: Icon(Icons.keyboard_arrow_up,
+            //                 color: Color(0xFFD3D3D3))),
+            //         Text(
+            //           "0",
+            //           style: TextStyle(fontSize: 18.0, color: Colors.grey),
+            //         ),
+            //         InkWell(
+            //             onTap: () {},
+            //             child: Icon(Icons.keyboard_arrow_down,
+            //                 color: Color(0xFFD3D3D3))),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               width: 20.0,
             ),
@@ -117,13 +117,13 @@ class _OrderCardState extends State<OrderCard> {
               ],
             ),
             Spacer(),
-            GestureDetector(
-              onTap: () {},
-              child: Icon(
-                Icons.cancel,
-                color: Colors.grey,
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {},
+            //   child: Icon(
+            //     Icons.cancel,
+            //     color: Colors.grey,
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -38,72 +38,72 @@ class _OrderPageState extends State<OrderPage> {
       ),
       child: Column(
         children: <Widget>[
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "Subtotal",
-                style: TextStyle(
-                    color: Color(0xFF9BA7C6),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "23.0",
-                style: TextStyle(
-                    color: Color(0xFF6C6D6D),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "Discount",
-                style: TextStyle(
-                    color: Color(0xFF9BA7C6),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "10.0",
-                style: TextStyle(
-                    color: Color(0xFF6C6D6D),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "Tax",
-                style: TextStyle(
-                    color: Color(0xFF9BA7C6),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "0.5",
-                style: TextStyle(
-                    color: Color(0xFF6C6D6D),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisSize: MainAxisSize.max,
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: <Widget>[
+          //     Text(
+          //       "Subtotal",
+          //       style: TextStyle(
+          //           color: Color(0xFF9BA7C6),
+          //           fontSize: 16.0,
+          //           fontWeight: FontWeight.bold),
+          //     ),
+          //     Text(
+          //       "23.0",
+          //       style: TextStyle(
+          //           color: Color(0xFF6C6D6D),
+          //           fontSize: 16.0,
+          //           fontWeight: FontWeight.bold),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 10.0,
+          // ),
+          // Row(
+          //   mainAxisSize: MainAxisSize.max,
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: <Widget>[
+          //     Text(
+          //       "Discount",
+          //       style: TextStyle(
+          //           color: Color(0xFF9BA7C6),
+          //           fontSize: 16.0,
+          //           fontWeight: FontWeight.bold),
+          //     ),
+          //     Text(
+          //       "10.0",
+          //       style: TextStyle(
+          //           color: Color(0xFF6C6D6D),
+          //           fontSize: 16.0,
+          //           fontWeight: FontWeight.bold),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 10.0,
+          // ),
+          // Row(
+          //   mainAxisSize: MainAxisSize.max,
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: <Widget>[
+          //     Text(
+          //       "Tax",
+          //       style: TextStyle(
+          //           color: Color(0xFF9BA7C6),
+          //           fontSize: 16.0,
+          //           fontWeight: FontWeight.bold),
+          //     ),
+          //     Text(
+          //       "0.5",
+          //       style: TextStyle(
+          //           color: Color(0xFF6C6D6D),
+          //           fontSize: 16.0,
+          //           fontWeight: FontWeight.bold),
+          //     ),
+          //   ],
+          // ),
           SizedBox(
             height: 10.0,
           ),
@@ -121,14 +121,14 @@ class _OrderPageState extends State<OrderPage> {
                 "Cart Total",
                 style: TextStyle(
                     color: Color(0xFF9BA7C6),
-                    fontSize: 16.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold),
               ),
               Text(
                 "26.5",
                 style: TextStyle(
-                    color: Color(0xFF6C6D6D),
-                    fontSize: 16.0,
+                    color: Color(0xFF9BA7C6),
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold),
               ),
             ],
@@ -136,52 +136,52 @@ class _OrderPageState extends State<OrderPage> {
           SizedBox(
             height: 20.0,
           ),
-          GestureDetector(
-            onTap: () {
-              if (user == null) {
-                print("user==null:  Called");
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => Authenticate()));
-              } else {
-                // Navigator.of(context).pop();
-                // Navigator.of(context).popUntil((route) => false);
-                // Navigator.of(context).pop(MaterialPageRoute(
-                //     builder: (BuildContext context) => Authenticate()));
-                print("Succeeded ");
+          // GestureDetector(
+          //   onTap: () {
+          //     if (user == null) {
+          //       print("user==null:  Called");
+          //       Navigator.of(context).push(MaterialPageRoute(
+          //           builder: (BuildContext context) => Authenticate()));
+          //     } else {
+          //       // Navigator.of(context).pop();
+          //       // Navigator.of(context).popUntil((route) => false);
+          //       // Navigator.of(context).pop(MaterialPageRoute(
+          //       //     builder: (BuildContext context) => Authenticate()));
+          //       print("Succeeded ");
 
-                // return ScopedModel<MainModel>(
-                //   model: mainModel,
-                //   child: MaterialApp(
-                //     debugShowCheckedModeBanner: false,
-                //     title: "Food Delivery App",
-                //     theme: ThemeData(primaryColor: Colors.blueAccent),
-                //     home: MainScreen(model: mainModel),
-                // home: AddFoodItem(),
-                // ),
-                // );
-                // }
-                // print("sigin page called");
+          //       // return ScopedModel<MainModel>(
+          //       //   model: mainModel,
+          //       //   child: MaterialApp(
+          //       //     debugShowCheckedModeBanner: false,
+          //       //     title: "Food Delivery App",
+          //       //     theme: ThemeData(primaryColor: Colors.blueAccent),
+          //       //     home: MainScreen(model: mainModel),
+          //       // home: AddFoodItem(),
+          //       // ),
+          //       // );
+          //       // }
+          //       // print("sigin page called");
 
-              }
-            },
-            child: Container(
-              height: 50.0,
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(35.0),
-              ),
-              child: Center(
-                child: Text(
-                  "Proceed To Checkout",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          //     }
+          //   },
+          //   child: Container(
+          //     height: 50.0,
+          //     decoration: BoxDecoration(
+          //       color: Theme.of(context).primaryColor,
+          //       borderRadius: BorderRadius.circular(35.0),
+          //     ),
+          //     child: Center(
+          //       child: Text(
+          //         "Proceed To Checkout",
+          //         style: TextStyle(
+          //           color: Colors.white,
+          //           fontSize: 18.0,
+          //           fontWeight: FontWeight.bold,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           SizedBox(
             height: 20.0,
           ),
