@@ -5,6 +5,7 @@ import 'package:foodfreelancing/src/widgets/small_button.dart';
 import "package:foodfreelancing/src/models/user.dart";
 import 'package:foodfreelancing/src/services/database.dart';
 import 'package:foodfreelancing/src/services/auth.dart';
+import 'package:foodfreelancing/src/pages/buyer_request_page.dart';
 import 'package:provider/provider.dart';
 import 'package:foodfreelancing/src/shared/loading.dart';
 import 'dart:io';
@@ -207,7 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        ChangePasswordPage())).then((value) {
+                                        AddBuyerRequest())).then((value) {
                               setState(() {
                                 check = false;
                               });
@@ -227,6 +228,27 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: CustomListTile(
                             icon: Icons.add_a_photo,
                             text: "Choose Image",
+                          ),
+                        ),
+                        Divider(
+                          height: 10.0,
+                          color: Colors.grey,
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        AddBuyerRequest())).then((value) {
+                              setState(() {
+                                check = false;
+                              });
+                            });
+                          },
+                          child: CustomListTile(
+                            icon: Icons.assignment_ind,
+                            text: "Request",
                           ),
                         ),
                         Divider(

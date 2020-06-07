@@ -20,6 +20,7 @@ class BuyerRequests {
     final String buyerPhoneNumber,
     final String buyerAddress,
     final String buyerPrice,
+    final String buyerDescription,
   ) async {
     QuerySnapshot docs = await buyerRequest.getDocuments();
     var listdocs = _userFromBuyerList(docs);
@@ -39,9 +40,10 @@ class BuyerRequests {
           .document(buyerFoodItemRequired)
           .setData({
         'Name': buyerName,
-        'Address': buyerAddress,
-        'PhoneNumber': buyerPhoneNumber,
-        'Price': buyerPrice
+        'Address': buyerAddress ?? "",
+        'PhoneNumber': buyerPhoneNumber ?? "",
+        'Price': buyerPrice,
+        'Description': buyerDescription ?? ""
       });
     } else {
       return await buyerRequest
@@ -50,9 +52,10 @@ class BuyerRequests {
           .document(buyerFoodItemRequired)
           .setData({
         'Name': buyerName,
-        'Address': buyerAddress,
-        'PhoneNumber': buyerPhoneNumber,
-        'Price': buyerPrice
+        'Address': buyerAddress ?? "",
+        'PhoneNumber': buyerPhoneNumber ?? "",
+        'Price': buyerPrice,
+        'Description': buyerDescription ?? ""
       });
     }
   }
