@@ -5,6 +5,7 @@ import '../pages/home_page.dart';
 import '../pages/order_page.dart';
 import '../pages/explore_page.dart';
 import '../pages/profile_page.dart';
+import '../pages/buyer_home_page.dart';
 import 'package:foodfreelancing/src/pages/buyer_request_page.dart';
 
 class BuyerMainScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _BuyerMainScreenState extends State<BuyerMainScreen> {
   int currentTab = 0;
 
   // Pages
-  HomePage homePage;
+  BuyerHomePage homePage;
   OrderPage orderPage;
   FavoritePage favoritePage;
   ProfilePage profilePage;
@@ -34,7 +35,7 @@ class _BuyerMainScreenState extends State<BuyerMainScreen> {
     // widget.foodModel.fetchFoods();
     widget.model.fetchFoods();
 
-    homePage = HomePage();
+    homePage = BuyerHomePage();
     orderPage = OrderPage();
     favoritePage = FavoritePage(model: widget.model);
     profilePage = ProfilePage();
