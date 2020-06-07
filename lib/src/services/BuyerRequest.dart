@@ -13,7 +13,8 @@ class BuyerRequests {
 
   final CollectionReference buyerRequest =
       Firestore.instance.collection("BuyerRequest");
-
+final CollectionReference buyerRequestAll =
+      Firestore.instance.collection("BuyerRequestAll");
   Future addBuyerReuest(
     final String buyerFoodItemRequired,
     final String buyerName,
@@ -32,7 +33,15 @@ class BuyerRequests {
         break;
       }
     }
-
+ await buyerRequestAll.document(uid).setData(
+   {
+        'Name': buyerName,
+        'Address': buyerAddress ?? "",
+        'PhoneNumber': buyerPhoneNumber ?? "",
+        'Price': buyerPrice,
+        'Description': buyerDescription ?? ""
+      }
+ );
     if (documentIdFound) {
       return await buyerRequest
           .document(uid)
