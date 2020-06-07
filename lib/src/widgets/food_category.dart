@@ -18,12 +18,29 @@ class FoodCategory extends StatefulWidget {
 }
 
 class _FoodCategoryState extends State<FoodCategory> {
+//   FireStore.getCollRegistrationNumbers().get()
+// .then(querySnapshot => {
+//     querySnapshot.forEach(doc => {
+//         console.log(doc.id);
+//     });
+// });
+
   final List<Category> _categories = categories;
   @override
-  final docIds = FoodItems().allDocumentIds;
+
+  // final docIds = FoodItems().allDocumentIds;
 
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
+    Firestore.instance
+        .collection("Task")
+        .getDocuments()
+        .then((value) => value.documents.forEach((element) {
+              print("Elelelelelelel");
+              print(element.documentID);
+            }));
+
     return StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
             .collection('Task')

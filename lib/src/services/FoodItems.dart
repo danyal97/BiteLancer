@@ -88,13 +88,21 @@ class FoodItems {
     return r;
   }
 
-  Future<List<User>> get allDocumentIds async {
-    QuerySnapshot docs = await foodItems.getDocuments();
-    var listdocs = _userFromFoodList(docs);
-    List<User> docids;
-    for (var doc in listdocs) {
-      docids.add(User(uid: doc.uid));
-    }
-    return docids;
-  }
+  // Future<List<User>> allDocumentIds() async {
+  //   QuerySnapshot docs =
+  //       await Firestore.instance.collection("Task").getDocuments();
+  //   // docs.documents.forEach((element) {
+  //   //   element.data.forEach((key, value) {
+  //   //     print(key);
+  //   //   });
+  //   // });
+  //   // var listdocs = _userFromFoodList(docs);
+  //   // print(listdocs);
+  //   // List<User> docids;
+  //   // for (var doc in listdocs) {
+  //   //   print(doc.uid);
+  //   //   docids.add(User(uid: doc.uid));
+  //   // }
+  //   // return docids;
+  // }
 }
