@@ -141,8 +141,8 @@ Widget _buildFoodItems(Food food) {
     child: BoughtFood(
       id: food.id,
       name: food.name,
-      imagePath: food.imagePath,
-      category: food.category,
+      imagePath: "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2Fbasil-dinner-food-background-red_1220-1023.jpg?alt=media&token=fc91c272-587f-415d-bc34-cc670d765ebc",
+     category: food.category,
       discount: food.discount,
       price: food.price.toDouble(),
       ratings: food.ratings,

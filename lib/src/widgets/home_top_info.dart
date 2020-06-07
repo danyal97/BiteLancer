@@ -14,11 +14,11 @@ class HomeTopInfo extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("What would", style: textStyle),
-              Text(
-                "you like to eat?",
-                style: textStyle,
-              )
+              Text("Buyers Request", style: textStyle),
+              // Text(
+              //   "you like to eat?",
+              //   style: textStyle,
+              // )
             ],
           ),
           Icon(

@@ -36,10 +36,19 @@ class _BoughtFoodState extends State<BoughtFood> {
           Container(
             height: 230.0,
             width: 340.0,
-            child: Image.asset(
-              widget.imagePath,
-              fit: BoxFit.cover,
-            ),
+            decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(60.0),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 3.0,
+                              offset: Offset(0, 4.0),
+                              color: Colors.black38),
+                        ],
+                        image: DecorationImage(
+                          image: NetworkImage(widget.imagePath),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
           ),
           Positioned(
             left: 0.0,
@@ -66,13 +75,29 @@ class _BoughtFoodState extends State<BoughtFood> {
                   children: <Widget>[
                     //Row(
                     // children: <Widget>[
-                    Text(
-                      "Name: " + widget.name + "",
+                      Row(children: <Widget>[
+                      Text(
+                      "Name: ",
                       style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.accents[5]),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          // backgroundColor: Colors.white
+                          ),
                     ),
+                    Text(
+                      widget.name,
+                       style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontStyle: FontStyle.italic,
+                          backgroundColor: Colors.white
+                          ),
+                    )
+                      ],)
+                    ,
                     Divider(
                       height: 2.0,
                     ),
@@ -87,42 +112,88 @@ class _BoughtFoodState extends State<BoughtFood> {
                     // ),
                     Container(
                       width: 200,
-                      child: Text(
-                        "Address: " + widget.category + "",
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.indigo),
-                        maxLines: 13,
-                      ),
+                      child: 
+                      Row(children: <Widget>[
+                      Text(
+                     "Address: ",
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          // backgroundColor: Colors.white
+                          ),
+                    ),
+                    Text(
+                      widget.category,
+                       style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontStyle: FontStyle.italic,
+                          backgroundColor: Colors.white
+                          ),
+                    )
+                      ],),
                     ),
                     Divider(
                       height: 2.0,
                     ),
                     Container(
                       width: 200,
-                      child: Text(
-                        "Description: " + widget.ratings + "",
-                        style: TextStyle(
-                            fontSize: 13.0,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.brown[600]),
-                        maxLines: 13,
-                      ),
+                      child:
+                       Row(children: <Widget>[
+                      Text(
+                      "Description: ",
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          // backgroundColor: Colors.white
+                          ),
+                    ),
+                    Text(
+                     widget.ratings,
+                       style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontStyle: FontStyle.italic,
+                          backgroundColor: Colors.white
+                          ),
+                    )
+                      ],) 
+                     ,
                     ),
                     Divider(
                       height: 5.0,
                     ),
                     Container(
                       width: 200,
-                      child: Text(
-                        "Price: Rs " + widget.price.toString() + "",
-                        style: TextStyle(
-                            fontSize: 13.0,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.deepPurple),
-                        maxLines: 13,
-                      ),
+                      child: 
+                      Row(children: <Widget>[
+                      Text(
+                       "Price: ",
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                          // backgroundColor: Colors.white
+                          ),
+                    ),
+                    Text(
+                      "Rs. "+widget.price.toString(),
+                       style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                          fontStyle: FontStyle.italic,
+                          backgroundColor: Colors.white
+                          ),
+                    )
+                      ],),
                     ),
 
                     // Text(
@@ -135,14 +206,19 @@ class _BoughtFoodState extends State<BoughtFood> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     RaisedButton(
-                        elevation: 5.0,
-                        color: Colors.yellow,
+                        elevation: 10.0,
+                        color: Colors.blue,
                         onPressed: () => print("Button Pressed"),
-                        padding: EdgeInsets.all(2.0),
-                        child: new Text("Send Req"),
+                        padding: EdgeInsets.all(5.0),
+                        child: new Text("Send Req",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.bold,
+                        )),
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.yellow[50]),
+                          side: BorderSide(color: Colors.blue[50]),
                         )),
                   ],
                 ),
