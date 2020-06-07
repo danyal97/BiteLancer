@@ -70,8 +70,11 @@ class _BoughtFoodState extends State<BoughtFood> {
                       "Name: " + widget.name + "",
                       style: TextStyle(
                           fontSize: 18.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black),
+                          fontWeight: FontWeight.w600,
+                          color: Colors.accents[5]),
+                    ),
+                    Divider(
+                      height: 2.0,
                     ),
 
                     //     RaisedButton(
@@ -82,22 +85,50 @@ class _BoughtFoodState extends State<BoughtFood> {
                     //     ),
                     //   ],
                     // ),
-                    Text(
-                      "Description: " + widget.ratings + "",
-                      style: TextStyle(
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                      maxLines: 8,
+                    Container(
+                      width: 200,
+                      child: Text(
+                        "Address: " + widget.category + "",
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.indigo),
+                        maxLines: 13,
+                      ),
                     ),
-                    Text(
-                      "Address:  : " + widget.category + "",
-                      style: TextStyle(color: Colors.white),
+                    Divider(
+                      height: 2.0,
                     ),
-                    Text(
-                      "Price:  : " + widget.price.toString() + "",
-                      style: TextStyle(color: Colors.white),
+                    Container(
+                      width: 200,
+                      child: Text(
+                        "Description: " + widget.ratings + "",
+                        style: TextStyle(
+                            fontSize: 13.0,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.brown[600]),
+                        maxLines: 13,
+                      ),
                     ),
+                    Divider(
+                      height: 5.0,
+                    ),
+                    Container(
+                      width: 200,
+                      child: Text(
+                        "Price: Rs " + widget.price.toString() + "",
+                        style: TextStyle(
+                            fontSize: 13.0,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.deepPurple),
+                        maxLines: 13,
+                      ),
+                    ),
+
+                    // Text(
+                    //   "Price:  : " + widget.price.toString() + "",
+                    //   style: TextStyle(color: Colors.white),
+                    // ),
                   ],
                 ),
                 Column(
