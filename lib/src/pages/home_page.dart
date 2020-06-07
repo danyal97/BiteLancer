@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
 import 'package:foodfreelancing/src/widgets/bought_foods.dart';
 import 'package:scoped_model/scoped_model.dart';

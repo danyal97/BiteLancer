@@ -79,11 +79,13 @@ class DatabaseService {
   Future<String> getType(String uid) async{
       try {
       final snapShot = await DatabaseService(uid:uid).sellerCollection.document(uid).get();
+      print("Shah");
       if (snapShot == null || !snapShot.exists) {
-
+        print("Shah");
         return "Buyer";
       }
       else{
+        print("No Shah");
          return "Seller";
       }
       

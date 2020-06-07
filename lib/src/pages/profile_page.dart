@@ -235,27 +235,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Colors.grey,
                         ),
                         FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        AddBuyerRequest())).then((value) {
-                              setState(() {
-                                check = false;
-                              });
-                            });
-                          },
-                          child: CustomListTile(
-                            icon: Icons.assignment_ind,
-                            text: "Request",
-                          ),
-                        ),
-                        Divider(
-                          height: 10.0,
-                          color: Colors.grey,
-                        ),
-                        FlatButton(
                           onPressed: () async {
                             await _auth.signOut();
                           },
