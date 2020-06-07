@@ -7,6 +7,14 @@ import 'package:foodfreelancing/src/widgets/button.dart';
 import 'package:foodfreelancing/src/widgets/show_dailog.dart';
 import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'dart:io';
+import 'dart:async';
+import 'package:foodfreelancing/src/services/database.dart';
+// import 'package:foodfreelancing/src/services/FoodItems.dart';
+import 'package:foodfreelancing/src/services/auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
 
 class AddFoodItem extends StatefulWidget {
   final Food food;
@@ -18,6 +26,58 @@ class AddFoodItem extends StatefulWidget {
 }
 
 class _AddFoodItemState extends State<AddFoodItem> {
+  var userinfo;
+  var id;
+  // bool check = false;
+  // bool check1 = true;
+  Future getUser(String uid) async {
+    userinfo = await foodItem.foodItems
+        .document(id)
+        .collection("FoodList")
+        .document(title)
+        .get()
+        .then((value) => value.data);
+
+    setState(() {
+      print(userinfo['image']);
+      // check = true;
+    });
+  }
+
+  final AuthService _auth = AuthService();
+  final DatabaseService _database = DatabaseService();
+  final FoodItems foodItem = FoodItems();
+  File _image;
+  final picker = ImagePicker();
+  String _uploadedFileURL;
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = File(pickedFile.path);
+      // uploadFile();
+      print('File selected');
+    });
+  }
+
+  Future uploadFile() async {
+    print('File Uploading');
+    StorageReference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('Foodpictures/${Path.basename(_image.path)}}');
+    StorageUploadTask uploadTask = storageReference.putFile(_image);
+    await uploadTask.onComplete;
+    print('File Uploaded');
+    storageReference.getDownloadURL().then((fileURL) async {
+      await foodItem.updateFoodPicture(id, fileURL, title);
+      setState(() {
+        _uploadedFileURL = fileURL;
+        print(_uploadedFileURL);
+        print("shahahah");
+      });
+    });
+  }
+
   String title;
   String category;
   String description;
@@ -30,6 +90,7 @@ class _AddFoodItemState extends State<AddFoodItem> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    id = user.uid;
     print("Add Food Item Uid: " + user.uid);
     return SafeArea(
       child: WillPopScope(
@@ -69,18 +130,27 @@ class _AddFoodItemState extends State<AddFoodItem> {
                 key: _foodItemFormKey,
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(bottom: 15.0),
-                      width: MediaQuery.of(context).size.width,
-                      height: 170.0,
-                      decoration: BoxDecoration(
-                        // color: Colors.red,
-                        borderRadius: BorderRadius.circular(10.0),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/noimage.png"),
+                    FlatButton(
+                      onPressed: getImage,
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 15.0),
+                        width: MediaQuery.of(context).size.width,
+                        height: 170.0,
+                        decoration: BoxDecoration(
+                          // color: Colors.red,
+                          borderRadius: BorderRadius.circular(10.0),
+
+                          image: DecorationImage(
+                            image: NetworkImage("${userinfo['image']}".length >
+                                    0
+                                ? "${userinfo['image']}"
+                                : 'https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/profilepictures%2Favatar.png?alt=media&token=6d1b2f61-f681-46f8-8292-c68c9b797c85'),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
+
                     _buildTextFormField("Food Title"),
                     _buildTextFormField("Category"),
                     _buildTextFormField("Description", maxLine: 5),
@@ -117,7 +187,11 @@ class _AddFoodItemState extends State<AddFoodItem> {
                                 print("Food price : " + price.toString());
                                 print("Food Dicount : " + discount.toString());
                                 FoodItems(uid: user.uid).addFoodItems(
-                                    title, category, description, price);
+                                    title,
+                                    category,
+                                    description,
+                                    price,
+                                    userinfo['image']);
                                 Navigator.of(context).pop();
                               },
                               child: Button(

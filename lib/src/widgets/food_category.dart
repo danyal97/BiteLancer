@@ -39,7 +39,9 @@ class _FoodCategoryState extends State<FoodCategory> {
                       title: foodTitles.documentID ?? " ",
                       price: foodTitles.data['Price'] ?? 0,
                       category: foodTitles.data['Category'] ?? " ",
-                      description: foodTitles.data['Description'] ?? " "),
+                      description: foodTitles.data['Description'] ?? " ",
+                      image:
+                          foodTitles.data['image'] ?? categories[0].imagePath),
                 )
                 .toList();
             print(foods.length);
@@ -54,7 +56,7 @@ class _FoodCategoryState extends State<FoodCategory> {
                   // print(foods[0].category);
                   return FoodCard(
                     categoryName: foods[index].category,
-                    imagePath: _categories[0].imagePath,
+                    imagePath: foods[0].image,
                     numberOfItems: foods[index].price.length,
                     // numberOfItems: _categories[index].numberOfItems,
                   );
