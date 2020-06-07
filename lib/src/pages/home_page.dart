@@ -22,6 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool loading = false;
   List<Food> _foods = foods;
 
   @override
@@ -32,47 +33,42 @@ class _HomePageState extends State<HomePage> {
 
   QuerySnapshot docs;
 
-  Future retrieveBuyerDocuments() async {
-    return await Firestore.instance.collection("Buyer").getDocuments();
-
-    // print("Document Printing Called");
-    // // print(doc.documents.length);
-    // print("Document Printing Called");
-    // // var documents=document.documents;
-    //
-  }
+  // Future retrieveBuyerDocuments() async {
+  //  return await Firestore.instance.collection("BuyerRequest").getDocuments();
+  //   // print("Document Printing Called");
+  //   // // print(doc.documents.length);
+  //   // print("Document Printing Called");
+  //   // // var documents=document.documents;
+  //   //
+  // }
 
   Future retrieve() async {
-    return await retrieveBuyerDocuments();
+    QuerySnapshot querySnapshot =
+        await Firestore.instance.collection("BuyerRequestAll").getDocuments();
+    var list = querySnapshot.documents;
+
+    print("dsdasdasdasd");
+    print(list.length);
+    setState(() {
+      loading = false;
+    });
   }
 
-  Future retrieve3() async {
-    var d = await retrieve();
-    print("Shabasssh");
-    print(d.documents.length);
-  }
-
-  bool loading = true;
   @override
   Widget build(BuildContext context) {
     if (loading) {
-      retrieve3();
+      // retrieve3();
       return Loading();
     } else {
       return StreamBuilder<QuerySnapshot>(
-          // initialData: docs,
-          stream: Firestore.instance
-              .collection('BuyerRequest')
-              .document()
-              .collection("Requests")
-              .snapshots(),
+          stream: Firestore.instance.collection('BuyerRequestAll').snapshots(),
           builder: (context, snapshot) {
-            print("Document Length");
+            print("sdnjasbdjasd");
             print(snapshot.data.documents.length);
-            print("Document Length");
             if (snapshot.hasData && snapshot.data.documents.length > 0) {
+              print('Document Alll');
               snapshot.data.documents.forEach((document) {
-                print(document.data['username']);
+                print(document.data['Name']);
               });
               return Scaffold(
                 backgroundColor: Colors.white,
