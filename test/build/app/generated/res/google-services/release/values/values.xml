@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">14738935254-3k6r7k1vop789qbcn7sinsm8de45segj.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://foodfreelancing.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">14738935254</string>
+    <string name="google_api_key" translatable="false">AIzaSyBto3MI9BNYrD-ALzrEft-Z8EGaR7iX1no</string>
+    <string name="google_app_id" translatable="false">1:14738935254:android:1680a203fb525339902877</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBto3MI9BNYrD-ALzrEft-Z8EGaR7iX1no</string>
+    <string name="google_storage_bucket" translatable="false">foodfreelancing.appspot.com</string>
+    <string name="project_id" translatable="false">foodfreelancing</string>
+</resources>
