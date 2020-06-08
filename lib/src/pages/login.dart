@@ -79,7 +79,9 @@ final AuthService _auth = AuthService();
                       ],
                     ),
                   ),
-                  FadeAnimation(
+                   Builder(
+        builder: (context) => 
+                          FadeAnimation(
                       1.4,
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 40),
@@ -93,6 +95,7 @@ final AuthService _auth = AuthService();
                                 left: BorderSide(color: Colors.black),
                                 right: BorderSide(color: Colors.black),
                               )),
+                              
                           child: MaterialButton(
                             minWidth: double.infinity,
                             onPressed: 
@@ -106,13 +109,15 @@ final AuthService _auth = AuthService();
                                         await _auth.signInWithEmailAndPassword(email, password);
 
                                   if (result is String) {
+                                     error = result.split(",")[1];
+                                    _displaySnackBar(context,error);
+                                          // Find the Scaffold in the widget tree and use
+                                          // it to show a SnackBar.
+                                      
                                     setState(() {
-                                      error = result.split(",")[1];
+                                     
                                       loading = false;
                                     });
-                                  // } else {
-                                  //   Navigator.pop(context);
-                                  // }
                                 }
                              },
                             // () {
@@ -137,7 +142,8 @@ final AuthService _auth = AuthService();
                             ),
                           ),
                         ),
-                      )),
+                      ))
+                      ),
                   FadeAnimation(
                       1.5,
                       Row(
@@ -179,7 +185,19 @@ final AuthService _auth = AuthService();
       ),
     );
   }
-
+_displaySnackBar(BuildContext context,String error) {
+  final snackBar = SnackBar(content: Text(error,
+  style: TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+  fontStyle: FontStyle.normal,
+  ),
+  )
+  ,
+  backgroundColor: Colors.red,);
+  Scaffold.of(context).showSnackBar(snackBar);
+}
   Widget makeInput({label, obscureText = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

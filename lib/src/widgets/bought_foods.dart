@@ -208,7 +208,8 @@ class _BoughtFoodState extends State<BoughtFood> {
                     RaisedButton(
                         elevation: 10.0,
                         color: Colors.blue,
-                        onPressed: () => print("Button Pressed"),
+                        onPressed: () => print("Button Pressed")
+                        ,
                         padding: EdgeInsets.all(5.0),
                         child: new Text("Send Req",
                         style: TextStyle(

@@ -43,6 +43,7 @@ class BuyerRequests {
       'Price': buyerPrice,
       'Description': buyerDescription ?? "",
       'Item': buyerFoodItemRequired,
+      'UID':uid,
     });
     if (documentIdFound) {
       return await buyerRequest
