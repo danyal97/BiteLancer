@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
 
     homePage = HomePage();
     orderPage = OrderPage();
-    favoritePage = FavoritePage(model: widget.model);
+    favoritePage = FavoritePage();
     profilePage = ProfilePage();
     pages = [homePage, favoritePage, orderPage, profilePage];
 

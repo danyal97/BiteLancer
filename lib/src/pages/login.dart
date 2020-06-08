@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool loading = false;
-final AuthService _auth = AuthService();
+  final AuthService _auth = AuthService();
   // final _formKey = GlobalKey<FormState>();
   String error = "";
   String email = "";
@@ -50,18 +50,19 @@ final AuthService _auth = AuthService();
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                        Container(
-                      height: 120.0,
-                      width: 120.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(60.0),
-                        image: DecorationImage(
-                          image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2F323f6041-5444-4073-9170-05ef5d06cca4_200x200.png?alt=media&token=21d09313-e45c-4e38-be84-45939e65b4e5"),
-                          fit: BoxFit.cover,
+                      Container(
+                        height: 120.0,
+                        width: 120.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(60.0),
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2F323f6041-5444-4073-9170-05ef5d06cca4_200x200.png?alt=media&token=21d09313-e45c-4e38-be84-45939e65b4e5"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
+                      SizedBox(
                         height: 20,
                       ),
                       FadeAnimation(
@@ -93,71 +94,68 @@ final AuthService _auth = AuthService();
                       ],
                     ),
                   ),
-                   Builder(
-        builder: (context) => 
-                          FadeAnimation(
-                      1.4,
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        child: Container(
-                          padding: EdgeInsets.only(top: 3, left: 3),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              border: Border(
-                                bottom: BorderSide(color: Colors.black),
-                                top: BorderSide(color: Colors.black),
-                                left: BorderSide(color: Colors.black),
-                                right: BorderSide(color: Colors.black),
-                              )),
-                              
-                          child: MaterialButton(
-                            minWidth: double.infinity,
-                            onPressed: 
-                             () async {
+                  Builder(
+                      builder: (context) => FadeAnimation(
+                          1.4,
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            child: Container(
+                              padding: EdgeInsets.only(top: 3, left: 3),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border(
+                                    bottom: BorderSide(color: Colors.black),
+                                    top: BorderSide(color: Colors.black),
+                                    left: BorderSide(color: Colors.black),
+                                    right: BorderSide(color: Colors.black),
+                                  )),
+                              child: MaterialButton(
+                                minWidth: double.infinity,
+                                onPressed: () async {
                                   // loading = true;
                                   setState(() {
                                     loading = true;
                                   });
                                   dynamic result;
-                                    result =
-                                        await _auth.signInWithEmailAndPassword(email, password);
+                                  result =
+                                      await _auth.signInWithEmailAndPassword(
+                                          email, password);
 
                                   if (result is String) {
-                                     error = result.split(",")[1];
-                                    _displaySnackBar(context,error);
-                                          // Find the Scaffold in the widget tree and use
-                                          // it to show a SnackBar.
-                                      
+                                    error = result.split(",")[1];
+                                    _displaySnackBar(context, error);
+                                    // Find the Scaffold in the widget tree and use
+                                    // it to show a SnackBar.
+
                                     setState(() {
-                                     
                                       loading = false;
                                     });
-                                }
-                             },
-                            // () {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) => OptionPage(
-                            //                 email: email,
-                            //                 password: password,
-                            //                 label: "login",
-                            //               )));
-                            // },
-                            height: 60,
-                            color: Colors.greenAccent,
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 18),
+                                  }
+                                },
+                                // () {
+                                //   Navigator.push(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //           builder: (context) => OptionPage(
+                                //                 email: email,
+                                //                 password: password,
+                                //                 label: "login",
+                                //               )));
+                                // },
+                                height: 60,
+                                color: Colors.greenAccent,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ))
-                      ),
+                          ))),
                   FadeAnimation(
                       1.5,
                       Row(
@@ -199,19 +197,23 @@ final AuthService _auth = AuthService();
       ),
     );
   }
-_displaySnackBar(BuildContext context,String error) {
-  final snackBar = SnackBar(content: Text(error,
-  style: TextStyle(
-  fontSize: 18.0,
-  fontWeight: FontWeight.bold,
-  color: Colors.white,
-  fontStyle: FontStyle.normal,
-  ),
-  )
-  ,
-  backgroundColor: Colors.red,);
-  Scaffold.of(context).showSnackBar(snackBar);
-}
+
+  _displaySnackBar(BuildContext context, String error) {
+    final snackBar = SnackBar(
+      content: Text(
+        error,
+        style: TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontStyle: FontStyle.normal,
+        ),
+      ),
+      backgroundColor: Colors.red,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
   Widget makeInput({label, obscureText = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
