@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:foodfreelancing/src/models/user.dart';
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
 import 'package:foodfreelancing/src/shared/loading.dart';
-// import 'package:foodfreelancing/src/widgets/bought_foods.dart';
+import 'package:foodfreelancing/src/widgets/bought_foods.dart';
 import 'package:provider/provider.dart';
-import 'package:foodfreelancing/src/widgets/bought_foods(2).dart';
+// import 'package:foodfreelancing/src/widgets/bought_foods(2).dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:foodfreelancing/src/widgets/home_top_info.dart';
 import 'package:foodfreelancing/src/widgets/food_category.dart';
@@ -134,34 +134,41 @@ Widget _buildFoodItems(Food food) {
       stream: Firestore.instance.collection("SellerRequest").snapshots(),
       builder: (context, snapshot) {
         final user = Provider.of<User>(context);
-        bool buyerFound = true;
-        bool sellerFound = true;
+        bool buyerNotFound = true;
+        bool sellerNotFound = true;
+        bool bothNotFound = true;
         if (snapshot.data.documents.length != null) {
           snapshot.data.documents.forEach((element) {
+            buyerNotFound = true;
+            sellerNotFound = true;
             element.data.forEach((key, value) {
               if (key == 'SellerUid') {
                 if (user.uid == value) {
                   print(user.uid);
                   print(value);
-                  sellerFound = false;
+                  sellerNotFound = false;
                 }
               }
               if (key == 'BuyerUid') {
                 if (food.id == value) {
                   print(value);
                   print(food.id);
-                  buyerFound = false;
+                  buyerNotFound = false;
                 }
               }
             });
+            if (!buyerNotFound) {
+              if (!sellerNotFound) {
+                bothNotFound = false;
+              }
+            }
           });
         }
 
         print("Printing Buyer Found");
-        print(sellerFound);
-        print(buyerFound);
+        print(bothNotFound);
         print("Buyer Found");
-        if ((buyerFound || sellerFound)) {
+        if (bothNotFound) {
           return Container(
             margin: EdgeInsets.only(bottom: 20.0),
             child: BoughtFood(
