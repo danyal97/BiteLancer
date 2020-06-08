@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
 import 'package:foodfreelancing/src/shared/loading.dart';
-import 'package:foodfreelancing/src/widgets/bought_foods.dart';
+import 'package:foodfreelancing/src/widgets/bought_foods(2).dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:foodfreelancing/src/widgets/home_top_info.dart';
 import 'package:foodfreelancing/src/widgets/food_category.dart';
