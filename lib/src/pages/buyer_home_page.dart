@@ -15,6 +15,7 @@ import '../models/food_model.dart';
 import 'package:provider/provider.dart';
 import 'package:foodfreelancing/src/models/user.dart';
 import 'package:foodfreelancing/src/models/buyer_request.dart';
+
 class BuyerHomePage extends StatefulWidget {
   // final FoodModel foodModel;
 
@@ -23,11 +24,11 @@ class BuyerHomePage extends StatefulWidget {
   _BuyerHomePageState createState() => _BuyerHomePageState();
 }
 
-class _BuyerHomePageState extends State< BuyerHomePage> {
-   bool loading = true;
+class _BuyerHomePageState extends State<BuyerHomePage> {
+  bool loading = true;
   List<Food> _foods;
   List<Food> _foods2 = foods;
-final textStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold);
+  final textStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold);
   @override
   void initState() {
     // widget.foodModel.fetchFoods();
@@ -46,9 +47,10 @@ final textStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold);
   // }
 
   Future retrieve() async {
-    QuerySnapshot querySnapshot = await Firestore.instance.collection("BuyerRequestAll").getDocuments();
+    QuerySnapshot querySnapshot =
+        await Firestore.instance.collection("BuyerRequestAll").getDocuments();
     var list = querySnapshot.documents;
-     
+
     print("dsdasdasdasd");
     print(list.length);
     setState(() {
@@ -56,17 +58,18 @@ final textStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold);
     });
   }
 
- 
   @override
   Widget build(BuildContext context) {
-       final user = Provider.of<User>(context);
-      return StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance.collection('BuyerRequest').document(user.uid)
+    final user = Provider.of<User>(context);
+    return StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance
+            .collection('BuyerRequest')
+            .document(user.uid)
             .collection('Requests')
             .snapshots(),
-          builder: (context, snapshot) {
-           if (snapshot.hasData && snapshot.data.documents.length > 0) {
-             List<Food> requests = snapshot.data.documents
+        builder: (context, snapshot) {
+          if (snapshot.hasData && snapshot.data.documents.length > 0) {
+            List<Food> requests = snapshot.data.documents
                 .map((buyer) => Food(
                       id: buyer.documentID,
                       name: buyer.data['Name'],
@@ -75,95 +78,92 @@ final textStyle = TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold);
                       discount: 20,
                       price: double.parse(buyer.data['Price']),
                       ratings: buyer.data['Description'],
-
-                     
                     ))
                 .toList();
             print(requests.length);
-              // snapshot.data.documents.forEach((document) {
-              //   print(document.data['Name']);
-              // });
-              return Scaffold(
-                backgroundColor: Colors.white,
-                body: ListView(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                  children: <Widget>[
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text("What would ", style: textStyle),
-                          Text(
-                            "you like to eat?",
-                            style: textStyle,
-                          )
-                        ],
-                        ),
-                    // HomeTopInfo(),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    // SearchField(),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: <Widget>[
-                    //     Text(
-                    //       "Frequently Bought Foods",
-                    //       style: TextStyle(
-                    //         fontSize: 18.0,
-                    //         fontWeight: FontWeight.bold,
-                    //       ),
-                    //     ),
-                    //     GestureDetector(
-                    //       onTap: () {
-                    //         print("I' pressed");
-                    //       },
-                    //       child: Text(
-                    //         "View all",
-                    //         style: TextStyle(
-                    //           color: Colors.orangeAccent,
-                    //           fontWeight: FontWeight.bold,
-                    //           fontSize: 18.0,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    SizedBox(height: 20.0),
-                    //ScopedModelDescendant<MainModel>(
-                    // builder: (BuildContext context, Widget child, MainModel model) {
-                    //return
-                    
-                    Column(
-                      
-                      children:
-                       requests.map(_buildFoodItems).toList(),
-                    ),
-                    
-                    //},
-                    //),
-                  ],
-                ),
-              );
-            } else {
-              return Container(
-                width: 0.0,
-                height: 0.0,
-              );
-            }
-          });
-    
+            // snapshot.data.documents.forEach((document) {
+            //   print(document.data['Name']);
+            // });
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: ListView(
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("What would ", style: textStyle),
+                      Text(
+                        "you like to eat?",
+                        style: textStyle,
+                      )
+                    ],
+                  ),
+                  // HomeTopInfo(),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  // SearchField(),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: <Widget>[
+                  //     Text(
+                  //       "Frequently Bought Foods",
+                  //       style: TextStyle(
+                  //         fontSize: 18.0,
+                  //         fontWeight: FontWeight.bold,
+                  //       ),
+                  //     ),
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         print("I' pressed");
+                  //       },
+                  //       child: Text(
+                  //         "View all",
+                  //         style: TextStyle(
+                  //           color: Colors.orangeAccent,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 18.0,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  SizedBox(height: 20.0),
+                  //ScopedModelDescendant<MainModel>(
+                  // builder: (BuildContext context, Widget child, MainModel model) {
+                  //return
+
+                  Column(
+                    children: requests.map(_buildFoodItems).toList(),
+                  ),
+
+                  //},
+                  //),
+                ],
+              ),
+            );
+          } else {
+            return Container(
+              width: 0.0,
+              height: 0.0,
+            );
+          }
+        });
   }
 }
+
 Widget _buildFoodItems(Food food) {
   return Container(
     margin: EdgeInsets.only(bottom: 20.0),
     child: BoughtFood(
       id: food.id,
       name: food.name,
-      imagePath: "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2Fbasil-dinner-food-background-red_1220-1023.jpg?alt=media&token=fc91c272-587f-415d-bc34-cc670d765ebc",
+      imagePath:
+          "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2Fbasil-dinner-food-background-red_1220-1023.jpg?alt=media&token=fc91c272-587f-415d-bc34-cc670d765ebc",
       category: food.category,
       discount: food.discount,
       price: food.price.toDouble(),
