@@ -25,11 +25,24 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   void initState() {
     super.initState();
+    widget.model.fetchFoods();
   }
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+
+    return StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection("Buyer").snapshots(),
+        builder: (context, snapshot) {
+          snapshot.data.documents.forEach((element) {
+            if (element.documentID == user.uid) {
+              buyer = true;
+            }
+          });
+          if (buyer) {
+            return BuyerExplorerPage();
+          } else {
             return Scaffold(
               key: _explorePageScaffoldKey,
               backgroundColor: Colors.white,
@@ -80,6 +93,8 @@ class _FavoritePageState extends State<FavoritePage> {
                 },
               ),
             );
+          }
+        });
   }
 }
 

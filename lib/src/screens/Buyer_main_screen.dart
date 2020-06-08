@@ -3,11 +3,11 @@ import 'package:foodfreelancing/src/admin/pages/add_food_item.dart';
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
 import '../pages/home_page.dart';
 import '../pages/order_page.dart';
-import '../pages/explore_page.dart';
+import '../pages/explore_page(2).dart';
 import '../pages/profile_page.dart';
 import '../pages/buyer_home_page.dart';
 import 'package:foodfreelancing/src/pages/buyer_request_page.dart';
-
+import 'package:foodfreelancing/src/pages/buyer_explorer_page.dart';
 class BuyerMainScreen extends StatefulWidget {
   final MainModel model;
 

@@ -10,6 +10,7 @@ import 'package:foodfreelancing/src/widgets/home_top_info.dart';
 import 'package:foodfreelancing/src/widgets/food_category.dart';
 import 'package:foodfreelancing/src/widgets/search_file.dart';
 import '../data/food_data.dart';
+import 'dart:async';
 // Model
 import '../models/food_model.dart';
 import 'package:provider/provider.dart';
@@ -35,19 +36,19 @@ class _BuyerExplorerPageState extends State<BuyerExplorerPage> {
   QuerySnapshot docs;
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
-    return StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('Seller').snapshots(),
+        return StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection('SellerRequest').snapshots(),
         builder: (context, snapshot) {
+           final user = Provider.of<User>(context);
           if (snapshot.hasData && snapshot.data.documents.length > 0) {
             List<Request> requests = snapshot.data.documents
                 .map(
                   (seller) => Request(
                     id: seller.documentID,
-                    requestID: "",
-                    name: seller.data['username'],
-                    imagePath: seller.data['img'],
-                    address: seller.data['Address'] ?? "",
+                    requestID: seller.data['BuyerUid'],
+                    name: seller.data['SellerUid'],
+                    imagePath: seller.data['SellerImage'],
+                    address: "",
                     title: "",
                     price: 34,
                     description: "",
@@ -101,56 +102,42 @@ class _BuyerExplorerPageState extends State<BuyerExplorerPage> {
 
 Widget _buildFoodItems(Request food) {
   return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection("SellerRequest").snapshots(),
+      stream: Firestore.instance.collection("Seller").snapshots(),
       builder: (context, snapshot) {
         final user = Provider.of<User>(context);
         bool buyerFound = false;
         bool sellerFound = false;
         bool bothFound = false;
+        var name ,img ,add;
         if (snapshot.data != null) {
           snapshot.data.documents.forEach((element) {
             buyerFound = false;
             sellerFound = false;
-            element.data.forEach((key, value) {
-              if (key == 'BuyerUid') {
-                if (user.uid == value) {
-                  print("Buyer Id: ");
-                  // print(user.uid);
-                  print(value);
-                  print(user.uid);
-                  buyerFound = true;
-                }
-              }
-              if (key == 'SellerUid') {
-                if (food.id == value) {
-                  print(value);
-                  print(food.id);
-                  sellerFound = true;
-                }
-              }
-            });
-            if (buyerFound) {
+            if(element.documentID == food.name){
+               sellerFound = true;
+               name = element['username'];
+               img = element['img'];
+               add = element['Address'];
+            }
+        
+            if (user.uid == food.requestID) {
               if (sellerFound) {
                 bothFound = true;
               }
             }
           });
         }
-
-        // print("Printing Buyer Found");
-        // print(bothNotFound);
-        // print("Buyer Found");
         if (bothFound) {
           return Container(
             margin: EdgeInsets.only(bottom: 20.0),
             child: BoughtFood(
               id: food.id,
               // requestID: food.requestID,
-              name: food.name,
-              imagePath: food.imagePath,
-              address: food.address,
-              title: food.title,
-              // price: food.price.toDouble(),
+              name: name,
+              imagePath: img,
+              address: add,
+              title: " ",
+              price: null,
               description: "I want To Provide Services to you",
             ),
           );

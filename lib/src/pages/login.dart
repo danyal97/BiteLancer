@@ -186,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
             FadeAnimation(
                 1.2,
                 Container(
-                  height: MediaQuery.of(context).size.height / 14,
+                  height: MediaQuery.of(context).size.height / 6,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/background.png'),
