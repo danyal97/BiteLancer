@@ -3,7 +3,6 @@ import 'package:foodfreelancing/src/animation/FadeAnimation.dart';
 import 'package:foodfreelancing/src/pages/option.dart';
 import 'package:foodfreelancing/src/services/auth.dart';
 
-
 class ChangePasswordPage extends StatefulWidget {
   @override
   final Function toggleView;
@@ -15,7 +14,7 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   bool loading = false;
-final AuthService _auth = AuthService();
+  final AuthService _auth = AuthService();
   // final _formKey = GlobalKey<FormState>();
   String error = "";
   String email = "";
@@ -75,8 +74,10 @@ final AuthService _auth = AuthService();
                     padding: EdgeInsets.symmetric(horizontal: 35),
                     child: Column(
                       children: <Widget>[
-                        FadeAnimation(1.3,
-                            makeInput(label: "New Password", obscureText: true)),
+                        FadeAnimation(
+                            1.3,
+                            makeInput(
+                                label: "New Password", obscureText: true)),
                       ],
                     ),
                   ),
@@ -96,7 +97,7 @@ final AuthService _auth = AuthService();
                               )),
                           child: MaterialButton(
                             minWidth: double.infinity,
-                            onPressed:  () async {
+                            onPressed: () async {
                               // Navigator.push(
                               //     context,
                               //     MaterialPageRoute(
@@ -105,17 +106,15 @@ final AuthService _auth = AuthService();
                               //               password: password,
                               //               label: "login",
                               //             )));
-                             
-                             dynamic result = await _auth.changePassword(password);
-                            if (result is String) {
-                              setState(() {
-                                
-                              });
-                              Navigator.pop(context);
-                            } else {
-                              Navigator.pop(context);
-                            }
-                          
+
+                              dynamic result =
+                                  await _auth.changePassword(password);
+                              if (result is String) {
+                                setState(() {});
+                                Navigator.pop(context);
+                              } else {
+                                Navigator.pop(context);
+                              }
                             },
                             height: 52,
                             color: Colors.greenAccent,

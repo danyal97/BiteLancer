@@ -135,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           // Neeedd to ask shahzaib
                           // if(userinfo['verified'])
-                            Icon(Icons.check_circle, color: Colors.blue),
+                          Icon(Icons.check_circle, color: Colors.blue),
                         ]),
                         SizedBox(
                           height: 10.0,
