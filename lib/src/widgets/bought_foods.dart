@@ -211,7 +211,7 @@ class _BoughtFoodState extends State<BoughtFood> {
                           SellerRequests(uid: user.uid).addSellerReuest(
                               widget.name,
                               widget.imagePath,
-                              "I want Provide Services to you",
+                              "I want To Provide Services to you",
                               user.uid,
                               widget.id);
                         },
