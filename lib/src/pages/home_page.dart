@@ -2,9 +2,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodfreelancing/src/models/user.dart';
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
 import 'package:foodfreelancing/src/shared/loading.dart';
 import 'package:foodfreelancing/src/widgets/bought_foods.dart';
+import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:foodfreelancing/src/widgets/home_top_info.dart';
 import 'package:foodfreelancing/src/widgets/food_category.dart';
@@ -48,29 +50,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // if (loading) {
-    //   // retrieve3();
-    //   return Loading();
-    // } else {
+    final user = Provider.of<User>(context);
     return StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance.collection('BuyerRequestAll').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.documents.length > 0) {
             List<Food> foods3 = snapshot.data.documents
                 .map((buyer) => Food(
-                      id: buyer.documentID,
+                      id: buyer.data['UID'],
                       name: buyer.data['Name'],
                       imagePath: _foods2[1].imagePath,
                       category: buyer.data['Address'],
                       discount: 20,
                       price: double.parse(buyer.data['Price']),
                       ratings: buyer.data['Description'],
-
-                      // title: foodTitles.documentID ?? " ",
-                      // price: foodTitles.data['Price'] ?? 0,
-                      // category: foodTitles.data['Category'] ?? " ",
-                      // description: foodTitles.data['Description'] ?? " ",
-                      // image: foodTitles.data['image'] ?? ""),
                     ))
                 .toList();
 
@@ -136,17 +129,54 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget _buildFoodItems(Food food) {
-  return Container(
-    margin: EdgeInsets.only(bottom: 20.0),
-    child: BoughtFood(
-      id: food.id,
-      name: food.name,
-      imagePath: "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2Fbasil-dinner-food-background-red_1220-1023.jpg?alt=media&token=fc91c272-587f-415d-bc34-cc670d765ebc",
-     category: food.category,
-      discount: food.discount,
-      price: food.price.toDouble(),
-      ratings: food.ratings,
-    ),
-  );
+  return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection("SellerRequest").snapshots(),
+      builder: (context, snapshot) {
+        final user = Provider.of<User>(context);
+        bool buyerFound = true;
+        bool sellerFound = true;
+        if (snapshot.data.documents.length != null) {
+          snapshot.data.documents.forEach((element) {
+            element.data.forEach((key, value) {
+              if (key == 'SellerUid') {
+                if (user.uid == value) {
+                  print(user.uid);
+                  print(value);
+                  sellerFound = false;
+                }
+              }
+              if (key == 'BuyerUid') {
+                if (food.id == value) {
+                  print(value);
+                  print(food.id);
+                  buyerFound = false;
+                }
+              }
+            });
+          });
+        }
+
+        print("Printing Buyer Found");
+        print(sellerFound);
+        print(buyerFound);
+        print("Buyer Found");
+        if ((buyerFound || sellerFound)) {
+          return Container(
+            margin: EdgeInsets.only(bottom: 20.0),
+            child: BoughtFood(
+              id: food.id,
+              name: food.name,
+              imagePath:
+                  "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2Fbasil-dinner-food-background-red_1220-1023.jpg?alt=media&token=fc91c272-587f-415d-bc34-cc670d765ebc",
+              category: food.category,
+              discount: food.discount,
+              price: food.price.toDouble(),
+              ratings: food.ratings,
+            ),
+          );
+        } else {
+          return Container();
+        }
+      });
 }
 // }
