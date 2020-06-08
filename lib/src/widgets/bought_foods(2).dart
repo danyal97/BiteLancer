@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:foodfreelancing/src/models/user.dart';
+import 'package:foodfreelancing/src/services/SellerRequest.dart';
+import 'package:provider/provider.dart';
+
 
 class BoughtFood extends StatefulWidget {
   final String id;
+  final String requestID;
   final String name;
   final String imagePath;
-  final String category;
+  final String address;
   final double price;
-  final double discount;
-  final String ratings;
+  final String title;
+  final String description;
 
   BoughtFood(
       {this.id,
+      this.requestID,
       this.name,
       this.imagePath,
-      this.category,
+      this.address,
+      this.title,
       this.price,
-      this.discount,
-      this.ratings});
+      this.description});
 
   @override
   _BoughtFoodState createState() => _BoughtFoodState();
@@ -27,6 +33,7 @@ class _BoughtFoodState extends State<BoughtFood> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return Center(
       // borderRadius: BorderRadius.all(
       //   Radius.circular(10.0),
@@ -74,12 +81,29 @@ class _BoughtFoodState extends State<BoughtFood> {
                 children: <Widget>[
                   Expanded(
                     child: ClipOval(
-                      child: Image.asset(
-                        'assets/images/avatar.png',
-                        fit: BoxFit.cover,
-                        height: 80,
-                        width: 40,
+                      child: Container(
+                      height: 80.0,
+                      width: 40.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(60.0),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 3.0,
+                              offset: Offset(0, 4.0),
+                              color: Colors.black38),
+                        ],
+                        image: DecorationImage(
+                          image: NetworkImage(widget.imagePath),
+                          fit: BoxFit.cover,
+                        ),
                       ),
+                    ),
+                      // Image.asset(
+                      //   'assets/images/avatar.png',
+                      //   fit: BoxFit.cover,
+                      //   height: 80,
+                      //   width: 40,
+                      // ),
                     ),
                     flex: 2,
                   ),
@@ -93,21 +117,21 @@ class _BoughtFoodState extends State<BoughtFood> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "items[index].name",
+                          widget.name,
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Avenir',
                               fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          "items[index].category",
+                          widget.title,
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Avenir',
                           ),
                         ),
                         Text(
-                          "items[index].category",
+                          widget.description,
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Avenir',
@@ -126,7 +150,7 @@ class _BoughtFoodState extends State<BoughtFood> {
                             ),
                             Flexible(
                               child: Text(
-                                "items[index].location",
+                                widget.address,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'Avenir',
@@ -145,7 +169,7 @@ class _BoughtFoodState extends State<BoughtFood> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Text(
-                          "Rs. 90",
+                          "Rs. "+ widget.price.toString(),
                           style: TextStyle(
                             color: Colors.orangeAccent,
                             fontWeight: FontWeight.bold,
@@ -159,7 +183,15 @@ class _BoughtFoodState extends State<BoughtFood> {
                         RaisedButton(
                             elevation: 10.0,
                             color: Colors.blue,
-                            onPressed: () => print("Button Pressed"),
+                            onPressed: () {
+                              SellerRequests(uid: user.uid).addSellerReuest(
+                              widget.name,
+                              widget.imagePath,
+                              widget.requestID,
+                              "I want To Provide Services to you",
+                              user.uid,
+                              widget.id);
+                            },
                             padding: EdgeInsets.all(5.0),
                             child: new Text("Send Req",
                                 style: TextStyle(

@@ -16,6 +16,7 @@ class SellerRequests {
   Future addSellerReuest(
     final String sellerName,
     final String sellerImage,
+     final String requestID,
     final String sellerChat,
     final String selleruid,
     final String buyeruid,
@@ -24,6 +25,7 @@ class SellerRequests {
         .document(selleruid + randomAlphaNumeric(10))
         .setData({
       'SellerName': sellerName ?? "",
+      'RequestUid':requestID ?? " ",
       'BuyerUid': buyeruid ?? "",
       'SellerUid': selleruid ?? "",
       'SellerImage': sellerImage ?? "",

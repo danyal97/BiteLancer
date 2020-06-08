@@ -164,10 +164,10 @@ Widget _buildFoodItems(Food food) {
       name: food.name,
       imagePath:
           "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2Fbasil-dinner-food-background-red_1220-1023.jpg?alt=media&token=fc91c272-587f-415d-bc34-cc670d765ebc",
-      category: food.category,
-      discount: food.discount,
+      address: food.category,
+      title: " ",
       price: food.price.toDouble(),
-      ratings: food.ratings,
+      description: food.ratings,
     ),
   );
 }
