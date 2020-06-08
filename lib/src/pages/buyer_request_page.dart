@@ -213,6 +213,7 @@ class _AddBuyerRequestState extends State<AddBuyerRequest> {
                                         buyerFoodItemRequired,
                                         userinfo['username'],
                                         userinfo['phoneNo'],
+                                        userinfo['img'],
                                         buyerAddress,
                                         buyerPrice,
                                         buyerDescription)

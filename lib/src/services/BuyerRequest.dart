@@ -20,6 +20,7 @@ class BuyerRequests {
     final String buyerFoodItemRequired,
     final String buyerName,
     final String buyerPhoneNumber,
+    final String buyerImage,
     final String buyerAddress,
     final String buyerPrice,
     final String buyerDescription,
@@ -37,9 +38,11 @@ class BuyerRequests {
     await buyerRequestAll.document(uid + randomAlphaNumeric(10)).setData({
       'Name': buyerName,
       'Address': buyerAddress ?? "",
+      'image': buyerImage,
       'PhoneNumber': buyerPhoneNumber ?? "",
       'Price': buyerPrice,
-      'Description': buyerDescription ?? ""
+      'Description': buyerDescription ?? "",
+      'Item': buyerFoodItemRequired,
     });
     if (documentIdFound) {
       return await buyerRequest
@@ -49,6 +52,7 @@ class BuyerRequests {
           .setData({
         'Name': buyerName,
         'Address': buyerAddress ?? "",
+        'image': buyerImage ?? "",
         'PhoneNumber': buyerPhoneNumber ?? "",
         'Price': buyerPrice,
         'Description': buyerDescription ?? ""
@@ -61,6 +65,7 @@ class BuyerRequests {
           .setData({
         'Name': buyerName,
         'Address': buyerAddress ?? "",
+        'image': buyerImage ?? "",
         'PhoneNumber': buyerPhoneNumber ?? "",
         'Price': buyerPrice,
         'Description': buyerDescription ?? ""
