@@ -47,6 +47,23 @@ class _SignupPageState extends State<SignupPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+                Container(
+                      height: 100.0,
+                      width: 100.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(60.0),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 3.0,
+                              offset: Offset(0, 4.0),
+                              color: Colors.black38),
+                        ],
+                        image: DecorationImage(
+                          image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2F323f6041-5444-4073-9170-05ef5d06cca4_200x200.png?alt=media&token=21d09313-e45c-4e38-be84-45939e65b4e5"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
               Column(
                 children: <Widget>[
                   FadeAnimation(
