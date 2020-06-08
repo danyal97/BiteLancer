@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodfreelancing/src/scoped-model/main_model.dart';
 import 'package:foodfreelancing/src/shared/loading.dart';
-import 'package:foodfreelancing/src/widgets/bought_foods(2).dart';
+import 'package:foodfreelancing/src/widgets/bought_foods(3).dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:foodfreelancing/src/widgets/home_top_info.dart';
 import 'package:foodfreelancing/src/widgets/food_category.dart';
@@ -15,7 +15,7 @@ import '../models/food_model.dart';
 import 'package:provider/provider.dart';
 import 'package:foodfreelancing/src/models/user.dart';
 import 'package:foodfreelancing/src/models/buyer_request.dart';
-
+import '../models/request_model.dart';
 class BuyerHomePage extends StatefulWidget {
   // final FoodModel foodModel;
 
@@ -69,15 +69,16 @@ class _BuyerHomePageState extends State<BuyerHomePage> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.documents.length > 0) {
-            List<Food> requests = snapshot.data.documents
-                .map((buyer) => Food(
+            List<Request> requests = snapshot.data.documents
+                .map((buyer) => Request(
                       id: buyer.documentID,
+                      requestID: buyer.documentID,
                       name: buyer.data['Name'],
-                      imagePath: _foods2[1].imagePath,
-                      category: buyer.data['Address'],
-                      discount: 20,
+                      imagePath: buyer.data['image'],
+                      address: buyer.data['Address'],
+                      title: buyer.data['Item'],
                       price: double.parse(buyer.data['Price']),
-                      ratings: buyer.data['Description'],
+                      description: buyer.data['Description'],
                     ))
                 .toList();
             print(requests.length);
@@ -156,18 +157,18 @@ class _BuyerHomePageState extends State<BuyerHomePage> {
   }
 }
 
-Widget _buildFoodItems(Food food) {
+Widget _buildFoodItems(Request food) {
   return Container(
     margin: EdgeInsets.only(bottom: 20.0),
     child: BoughtFood(
       id: food.id,
+      requestID:food.requestID,
       name: food.name,
-      imagePath:
-          "https://firebasestorage.googleapis.com/v0/b/foodfreelancing.appspot.com/o/Foodpictures%2Fbasil-dinner-food-background-red_1220-1023.jpg?alt=media&token=fc91c272-587f-415d-bc34-cc670d765ebc",
-      address: food.category,
-      title: " ",
+      imagePath: food.imagePath,
+      address: food.address,
+      title: food.title,
       price: food.price.toDouble(),
-      description: food.ratings,
+      description: food.description,
     ),
   );
 }

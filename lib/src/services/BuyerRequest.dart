@@ -56,7 +56,8 @@ class BuyerRequests {
         'image': buyerImage ?? "",
         'PhoneNumber': buyerPhoneNumber ?? "",
         'Price': buyerPrice,
-        'Description': buyerDescription ?? ""
+        'Description': buyerDescription ?? "",
+        'Item': buyerFoodItemRequired,
       });
     } else {
       return await buyerRequest
@@ -69,7 +70,8 @@ class BuyerRequests {
         'image': buyerImage ?? "",
         'PhoneNumber': buyerPhoneNumber ?? "",
         'Price': buyerPrice,
-        'Description': buyerDescription ?? ""
+        'Description': buyerDescription ?? "",
+        'Item': buyerFoodItemRequired,
       });
     }
   }
